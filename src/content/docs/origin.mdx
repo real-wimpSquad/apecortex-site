@@ -1,0 +1,72 @@
+---
+title: A note on the name
+description: Where APE came from, and why the acronym arrived first.
+template: splash
+---
+
+import { Image } from 'astro:assets';
+import apePortrait from '../../assets/ape.png';
+
+<figure class="origin-portrait">
+  <Image
+    src={apePortrait}
+    alt="A distinguished chimpanzee in a crimson velvet smoking jacket, reading by a fireplace in a leather-bound library. An APE Exocortex mug sits beside an open notebook showing a hand-drawn L1-L2-L3 tiered memory diagram."
+    widths={[480, 720, 960, 1254]}
+    sizes="(min-width: 760px) 520px, 90vw"
+    loading="eager"
+    class="origin-img"
+  />
+  <figcaption>The velvet smoking jacket is optional. The memory is not.</figcaption>
+</figure>
+
+The acronym arrived first.
+
+**APE** — *Agent Persistence Exocortex.* It read like a name a serious system would carry. The expansion came after, and to the system's credit, every word still belongs.
+
+*Agent*, because the thing is built to serve agents — not chat sessions, not retrieval pipelines, not document corpora. *Persistence*, because the entire premise is that memory should outlive the process that wrote it. *Exocortex*, because what APE is, structurally, is a brain you can detach: graph and corpus on disk, queryable from anywhere, surviving every model migration in front of it.
+
+The portrait above is, of course, an editorial liberty. APE does not in fact wear a smoking jacket, take notes by firelight, or drink from a branded mug. It runs as a Rust binary alongside SQLite and Qdrant, and its taste in jackets is unrecorded.
+
+But the image carries something true. The point of an exocortex is composure — a record kept carefully enough that the agent reading it can act with the bearing of someone who has been here before. Memory, dressed for the occasion.
+
+<p class="origin-back"><a href="/">← back</a></p>
+
+<style>{`
+  .origin-portrait {
+    margin: 0 0 3rem;
+    padding: 0;
+  }
+  .origin-img {
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    border-radius: 4px;
+    border: 1px solid var(--ape-border);
+    box-shadow:
+      0 24px 48px -24px rgba(0, 0, 0, 0.6),
+      0 4px 12px -4px rgba(0, 0, 0, 0.4);
+  }
+  .origin-portrait figcaption {
+    margin-top: 1rem;
+    font-family: var(--ape-font-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--ape-text-muted);
+    padding-left: 1rem;
+    border-left: 1px solid var(--ape-border);
+    max-width: 30rem;
+  }
+  .origin-back {
+    margin-top: 4rem;
+    font-family: var(--ape-font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+  }
+  .origin-back a {
+    color: var(--ape-text-muted);
+    text-decoration: none;
+  }
+  .origin-back a:hover { color: var(--ape-amber); }
+`}</style>

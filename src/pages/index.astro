@@ -1,15 +1,7 @@
 ---
-import { Image } from 'astro:assets';
-import apePortrait from '../assets/ape.png';
 import GlyphField from '../components/GlyphField.astro';
 import GlyphCard from '../components/GlyphCard.astro';
 import '../styles/tokens.css';
-
-// Alt taglines parked here for easy swapping:
-//   • "Your agents forget everything. APE is what they remember with."
-//   • "Give your agents a past. And a future."
-//   • "Memory, compressed. Agents, remembered."
-//   • "A cortex for the stateless."
 ---
 
 <html lang="en">
@@ -19,9 +11,15 @@ import '../styles/tokens.css';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>APE — Agent Persistence Exocortex</title>
-    <meta name="description" content="APE is a persistent, compressed memory layer your AI agents actually remember with — across sessions, models, and tasks." />
+    <meta
+      name="description"
+      content="A persistent, compressed memory layer for AI agents — across sessions, models, and vendors. Self-hosted. Translation-based. Yours."
+    />
     <meta property="og:title" content="APE — Agent Persistence Exocortex" />
-    <meta property="og:description" content="A persistent, compressed memory layer your AI agents actually remember with." />
+    <meta
+      property="og:description"
+      content="A persistent, compressed memory layer for AI agents — across sessions, models, and vendors."
+    />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://apecortex.com" />
     <meta property="og:image" content="https://apecortex.com/og-ape.jpg" />
@@ -53,73 +51,89 @@ import '../styles/tokens.css';
     </header>
 
     <main>
+      <!-- ─────────────────────────  HERO  ───────────────────────── -->
       <section class="hero">
-        <p class="eyebrow">Agent · Persistence · Exocortex</p>
-        <h1>
-          Agents without memory<br />
-          are <span class="strike">interns</span>.<br />
-          <span class="accent">APE gives them a career.</span>
+        <p class="hero-eyebrow">Agent · Persistence · Exocortex</p>
+        <h1 class="hero-title">
+          A cortex<br />
+          for the<br />
+          <span class="accent">stateless.</span>
         </h1>
-        <p class="sub">
-          A persistent, compressed memory layer your AI agents actually remember with —
-          across sessions, models, and vendors.
+        <p class="hero-sub">
+          A persistent, compressed memory layer for AI agents — across sessions,
+          models, and vendors. Self-hosted. Translation-based. Yours.
         </p>
         <div class="cta-row">
-          <a class="cta primary" href="/intro">How it works →</a>
+          <a class="cta primary" href="/intro">Read the docs →</a>
           <a class="cta ghost" href="https://github.com/real-wimpSquad/ape" rel="noopener">
-            Try APE yourself →
+            Source on GitHub
           </a>
         </div>
       </section>
 
-      <section class="what">
-        <figure class="portrait">
-          <Image
-            src={apePortrait}
-            alt="A distinguished chimpanzee in a crimson velvet smoking jacket, reading by a fireplace in a leather-bound library. An APE Exocortex mug sits beside an open notebook showing a hand-drawn L1-L2-L3 tiered memory diagram."
-            widths={[480, 720, 960, 1254]}
-            sizes="(min-width: 900px) 42vw, 90vw"
-            loading="eager"
-            class="portrait-img"
-          />
-          <figcaption>The velvet smoking jacket is optional. The memory is not.</figcaption>
-        </figure>
-
-        <div class="what-prose">
-          <p class="what-eyebrow">— What's actually going on</p>
-          <p class="what-lead">
-            APE sits quietly behind your agents. It watches what happens — conversations,
-            decisions, discoveries — and translates it into <em>glyph</em>, a dense
-            operator notation.
-          </p>
-          <p class="what-body">
-            Glyph lives in a graph. The next time an agent needs context, it asks the
-            graph, not its own forgetful model. Your agents stop starting from scratch.
-          </p>
-        </div>
+      <!-- ─────────────────────────  §I  THE SHAPE  ───────────────────────── -->
+      <section class="essay" data-reveal style="--i:0">
+        <p class="section-eyebrow">
+          <span class="numeral">I.</span><span class="rule"></span><span class="label">The shape</span>
+        </p>
+        <p class="lede">
+          <span class="dropcap">A</span>PE is the
+          <strong>Agent Persistence Exocortex</strong> — a memory layer that sits
+          beside your agents and remembers for them. It watches what passes
+          through — conversations, decisions, discoveries — and translates the
+          record into a dense operator notation called
+          <em>glyph</em>. The result lives in a graph, not a flat log. The next
+          time an agent needs context, it asks the graph. Your agents stop
+          starting from scratch.
+        </p>
+        <p class="aside">
+          <em>
+            There is, of course, the matter of the name —
+            <a href="/origin">a longer story</a>.
+          </em>
+        </p>
       </section>
 
-      <section class="cards-section">
-        <div class="cards-head">
-          <h2>Prose in. Glyph out. Prose again if you want it.</h2>
-          <p class="cards-sub">
-            The operator set is open. Glyph reaches for the most precise symbol
-            — <code>→</code> flow, <code>¬</code> negation, <code>∧</code> joint
-            requirement, <code>⊂</code> containment, <code>∃</code> existence,
-            <code>≡</code> equivalence — borrowing from math and logic, coining
-            new ones when nothing fits. Every fact survives; only the representation changes.
-          </p>
+      <!-- ─────────────────────────  §II  THE TRANSLATION  ───────────────────────── -->
+      <section class="translation">
+        <p class="section-eyebrow">
+          <span class="numeral">II.</span><span class="rule"></span><span class="label">The translation</span>
+        </p>
+
+        <div class="big-translation" data-reveal style="--i:0">
+          <div class="big-side big-prose">
+            <p class="side-tag">prose in</p>
+            <p class="side-text">
+              On Tuesday's standup, Priya flagged the auth bug — it's a P0 that
+              blocks launch, and unblocking it needs both security sign-off and a
+              QA rerun. Hotfix by Friday; rollback if it slips.
+            </p>
+          </div>
+
+          <div class="big-divider" aria-hidden="true">
+            <span class="big-arrow">→</span>
+          </div>
+
+          <div class="big-side big-glyph">
+            <p class="side-tag">glyph</p>
+            <code class="side-text mono">{`(day:Tue_standup)Priya→flagged:auth_bug=P0>blocks:launch
+unblock→[security_signoff∧QA_rerun]
+plan:hotfix→Friday|(slip→rollback)`}</code>
+          </div>
         </div>
 
+        <p class="translation-blurb">
+          The operator set is open. Glyph reaches for the most precise symbol —
+          <code>→</code> flow, <code>¬</code> negation, <code>∧</code> joint
+          requirement, <code>⊂</code> containment, <code>∃</code> existence,
+          <code>≡</code> equivalence — borrowing from math and logic, coining new
+          ones when nothing fits. Every fact survives; only the representation
+          changes.
+        </p>
+
+        <p class="translation-more">— And in other shapes:</p>
+
         <div class="cards">
-          <GlyphCard
-            eyebrow="Meeting note"
-            prose="In Tuesday's standup, Priya flagged the auth bug — it's P0, blocks launch, and unblocking it needs both security sign-off and a QA rerun. Hotfix by Friday; rollback if it slips."
-            glyph={`(day:Tue_standup)Priya→flagged:auth_bug=P0>blocks:launch
-unblock→[security_signoff∧QA_rerun]
-plan:hotfix→Friday|(slip→rollback)`}
-            back="Tuesday standup — Priya flagged the auth bug (P0, blocks launch); unblocking needs both security sign-off and QA rerun; hotfix Friday, rollback if it slips."
-          />
           <GlyphCard
             eyebrow="Bug report"
             prose="The app crashes on startup after the 2.4 update. Affects every iPhone older than the 12. Android and iPad are unaffected. Crash rate jumped from 0.1% to 8% overnight."
@@ -136,11 +150,22 @@ dx:ear_infection(low_grade)≡last_spring_strain|¬serious
 tx:drops→2x_daily_7d|(symptoms→persist>recheck)`}
             back="Vet with Mia (our Shiba), this morning — low-grade ear infection, equivalent to last spring's strain, not serious; drops twice daily for a week; recheck if symptoms persist."
           />
+          <GlyphCard
+            eyebrow="Travel note"
+            prose="Booked the Lisbon trip for the first week of October. Direct flight outbound, one stop in Madrid coming back. Hotel in Alfama; rail day-trip to Sintra mid-week if the weather holds."
+            glyph={`trip:Lisbon→Oct_W1
+flight:[outbound→direct|return→1_stop(Madrid)]
+stay:Alfama|rail→Sintra(mid_week)|cond:weather_holds`}
+            back="Lisbon, first week of October — direct out, one stop via Madrid back; staying in Alfama, day-trip by rail to Sintra mid-week if weather holds."
+          />
         </div>
       </section>
 
-      <section class="why-editorial">
-        <p class="why-eyebrow">— Why it matters</p>
+      <!-- ─────────────────────────  §III  WHY IT MATTERS  ───────────────────────── -->
+      <section class="why">
+        <p class="section-eyebrow">
+          <span class="numeral">III.</span><span class="rule"></span><span class="label">Why it matters</span>
+        </p>
         <ol class="statements">
           <li class="statement" data-reveal style="--i:0">
             <span class="marker">01</span>
@@ -167,20 +192,18 @@ tx:drops→2x_daily_7d|(symptoms→persist>recheck)`}
             <span class="marker">04</span>
             <p>
               <span class="key">Yours.</span>
-              <em>Runs on your own hardware. No one else holds your agent's mind.</em>
-            </p>
-          </li>
-          <li class="statement" data-reveal style="--i:4">
-            <span class="marker">05</span>
-            <p>
-              <span class="key">Your data is your data.</span>
-              <em>It stays on your machine. It doesn't train someone else's model.</em>
+              <em>Runs on your own hardware. Your data stays on your machine — and doesn't train anyone else's model.</em>
             </p>
           </li>
         </ol>
       </section>
 
-      <section class="ship-manifest">
+      <!-- ─────────────────────────  §IV  HOW IT SHIPS  ───────────────────────── -->
+      <section class="ship">
+        <p class="section-eyebrow">
+          <span class="numeral">IV.</span><span class="rule"></span><span class="label">How it ships</span>
+        </p>
+
         <h2 class="terminal-head">
           <span class="prompt">$</span><span class="sp"> </span><span class="cmd">ape ship</span><span class="sp"> </span><span class="flag">--list</span><span class="caret">_</span>
         </h2>
@@ -188,7 +211,7 @@ tx:drops→2x_daily_7d|(symptoms→persist>recheck)`}
         <dl class="manifest">
           <div class="row" data-reveal style="--i:0">
             <dt>--airgap-or-api</dt>
-            <dd>run local with your own models, or plug into <span class="value">Claude</span>, <span class="value">ChatGPT</span>, or <span class="value">Grok</span> <span class="note">// yes, really</span></dd>
+            <dd>run local with your own models, or plug into <span class="value">Claude</span>, <span class="value">ChatGPT</span>, or <span class="value">Grok</span></dd>
           </div>
           <div class="row" data-reveal style="--i:1">
             <dt>--no-build</dt>
@@ -196,7 +219,7 @@ tx:drops→2x_daily_7d|(symptoms→persist>recheck)`}
           </div>
           <div class="row" data-reveal style="--i:2">
             <dt>--install-time</dt>
-            <dd><span class="value">≈ 60s</span> — one command, one config file, one cup of coffee</dd>
+            <dd><span class="value">≈ 60s</span> — one command, one config file</dd>
           </div>
           <div class="row" data-reveal style="--i:3">
             <dt>--subscriptions</dt>
@@ -214,25 +237,49 @@ tx:drops→2x_daily_7d|(symptoms→persist>recheck)`}
             <dt>--ops-surface</dt>
             <dd>one service, one store, no sidecars</dd>
           </div>
-          <div class="row wink" data-reveal style="--i:7">
-            <dt>--jawline</dt>
-            <dd><span class="value">incredible</span> <span class="note">// not a feature, strictly speaking. still true.</span></dd>
-          </div>
         </dl>
-      </section>
-
-      <section class="tech">
-        <p class="tech-line">
-          Rust · SQLite · Qdrant | MCP · APEChat | enterprise · homelab
-        </p>
       </section>
     </main>
 
-    <footer>
-      <p>
-        APE — Agent Persistence Exocortex ·
-        <a href="/intro">Docs</a> ·
-        <a href="https://github.com/real-wimpSquad/ape" rel="noopener">GitHub</a>
+    <!-- ─────────────────────────  FOOTER  ───────────────────────── -->
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <p class="footer-mark"><span class="mark-arrow">→</span> APE</p>
+          <p class="footer-tagline">Agent Persistence Exocortex.</p>
+          <p class="footer-stack">Rust · SQLite · Qdrant · MCP</p>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-head">Documentation</p>
+          <ul>
+            <li><a href="/intro">What is APE?</a></li>
+            <li><a href="/glyph-primer">Glyph primer</a></li>
+            <li><a href="/runtime/architecture">Runtime architecture</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-head">Source</p>
+          <ul>
+            <li><a href="https://github.com/real-wimpSquad/ape" rel="noopener">GitHub</a></li>
+            <li><a href="https://github.com/real-wimpSquad/ape/issues" rel="noopener">Issues</a></li>
+            <li><a href="https://github.com/real-wimpSquad/ape/blob/main/LICENSE" rel="noopener">License</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-head">Apocrypha</p>
+          <ul>
+            <li><a href="/origin">Origin</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-rule"></div>
+      <p class="footer-copy">
+        APE — a self-hosted exocortex.
+        Memory, dressed for the occasion.
       </p>
     </footer>
 
@@ -260,14 +307,16 @@ tx:drops→2x_daily_7d|(symptoms→persist>recheck)`}
         flex-direction: column;
       }
 
+      /* ────────────────  Top nav  ──────────────── */
+
       .topnav {
         position: relative;
         z-index: 2;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1.5rem clamp(1.25rem, 5vw, 3rem);
-        max-width: 68rem;
+        padding: 1.75rem clamp(1.25rem, 5vw, 3rem);
+        max-width: 70rem;
         margin: 0 auto;
         width: 100%;
         box-sizing: border-box;
@@ -292,62 +341,93 @@ tx:drops→2x_daily_7d|(symptoms→persist>recheck)`}
       }
       .topnav nav a:hover { color: var(--ape-amber); }
 
+      /* ────────────────  Layout  ──────────────── */
+
       main {
         position: relative;
         z-index: 1;
         flex: 1;
-        max-width: 68rem;
+        max-width: 70rem;
         margin: 0 auto;
         padding: 0 clamp(1.25rem, 5vw, 3rem);
         width: 100%;
         box-sizing: border-box;
       }
 
-      section { padding: 4.5rem 0; }
-      section + section { border-top: 1px solid var(--ape-border); }
+      /* Single rhythm: 6.5rem of breath between sections, plus a hairline. */
+      section {
+        padding: 6.5rem 0;
+        position: relative;
+      }
+      section + section {
+        border-top: 1px solid var(--ape-border);
+      }
 
-      .hero { padding-top: 5rem; padding-bottom: 5.5rem; }
-      .eyebrow {
+      /* Standardized section eyebrow — Roman numeral · rule · uppercase label */
+      .section-eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 0 0 3rem;
         font-family: var(--ape-font-mono);
-        font-size: 0.78rem;
+        font-size: 0.72rem;
         text-transform: uppercase;
         letter-spacing: 0.28em;
         color: var(--ape-amber-dim);
-        margin: 0 0 1.75rem;
       }
-      h1 {
-        font-family: var(--ape-font-prose);
-        font-weight: 700;
-        font-size: clamp(2.5rem, 6vw, 4.25rem);
-        line-height: 1.08;
-        letter-spacing: -0.02em;
-        margin: 0 0 1.75rem;
+      .section-eyebrow .numeral {
+        font-family: var(--ape-font-display);
+        font-style: italic;
+        font-size: 1.15rem;
+        text-transform: none;
+        letter-spacing: 0;
+        color: var(--ape-amber);
+        line-height: 1;
+        padding-top: 0.05em;
+      }
+      .section-eyebrow .rule {
+        flex: 0 0 3rem;
+        height: 1px;
+        background: var(--ape-amber-dim);
+        opacity: 0.55;
+      }
+      .section-eyebrow .label {
+        color: var(--ape-amber-dim);
+      }
+
+      /* ────────────────  Hero  ──────────────── */
+
+      .hero {
+        padding: 4.5rem 0 6.5rem;
+      }
+      .hero-eyebrow {
+        font-family: var(--ape-font-mono);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--ape-amber-dim);
+        margin: 0 0 2.25rem;
+      }
+      .hero-title {
+        font-family: var(--ape-font-display);
+        font-weight: 400;
+        font-size: clamp(3.25rem, 8.5vw, 6.5rem);
+        line-height: 0.98;
+        letter-spacing: -0.018em;
+        margin: 0 0 2.25rem;
         color: var(--ape-text);
       }
-      h1 .strike {
-        position: relative;
-        color: var(--ape-text-muted);
+      .hero-title .accent {
+        color: var(--ape-amber);
         font-style: italic;
-        font-weight: 500;
       }
-      h1 .strike::after {
-        content: '';
-        position: absolute;
-        left: -2%;
-        right: -2%;
-        top: 58%;
-        height: 2px;
-        background: var(--ape-amber-dim);
-        transform: rotate(-2deg);
-      }
-      h1 .accent { color: var(--ape-amber); }
-
-      .sub {
-        font-size: 1.2rem;
+      .hero-sub {
+        font-family: var(--ape-font-prose);
+        font-size: 1.18rem;
         line-height: 1.55;
         color: var(--ape-text-muted);
-        max-width: 36rem;
-        margin: 0 0 2.25rem;
+        max-width: 38rem;
+        margin: 0 0 2.75rem;
       }
 
       .cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
@@ -379,107 +459,146 @@ tx:drops→2x_daily_7d|(symptoms→persist>recheck)`}
         color: var(--ape-amber);
       }
 
-      h2 {
-        font-family: var(--ape-font-prose);
-        font-weight: 600;
-        font-size: clamp(1.5rem, 3vw, 2rem);
-        letter-spacing: -0.01em;
-        margin: 0 0 1.5rem;
-        color: var(--ape-text);
-      }
+      /* ────────────────  §I — The shape (editorial lede + drop cap)  ──────────────── */
 
-      /* ───────── What's actually going on — editorial portrait ───────── */
+      .essay { max-width: 44rem; }
 
-      .what {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-        padding: 5.5rem 0 5rem;
-        align-items: start;
-      }
-      @media (min-width: 900px) {
-        .what {
-          grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-          gap: 3.5rem;
-        }
-      }
-
-      .portrait {
-        margin: 0;
-        padding: 0;
-        position: relative;
-      }
-      .portrait-img {
-        display: block;
-        width: 100%;
-        height: auto;
-        border-radius: 4px;
-        border: 1px solid var(--ape-border);
-        box-shadow:
-          0 20px 40px -20px rgba(0, 0, 0, 0.55),
-          0 4px 12px -4px rgba(0, 0, 0, 0.4);
-      }
-      .portrait figcaption {
-        margin-top: 1rem;
-        font-family: var(--ape-font-display);
-        font-style: italic;
-        font-size: 1rem;
-        line-height: 1.45;
-        color: var(--ape-text-muted);
-        padding-left: 1rem;
-        border-left: 1px solid var(--ape-border);
-        max-width: 28rem;
-      }
-
-      .what-prose {
-        padding-top: 0.5rem;
-      }
-      .what-eyebrow {
-        font-family: var(--ape-font-mono);
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        letter-spacing: 0.3em;
-        color: var(--ape-amber-dim);
-        margin: 0 0 1.75rem;
-      }
-      .what-lead {
-        margin: 0 0 1.25rem;
+      .lede {
         font-family: var(--ape-font-display);
         font-weight: 400;
         font-size: clamp(1.4rem, 2.1vw, 1.75rem);
-        line-height: 1.35;
+        line-height: 1.45;
         letter-spacing: -0.005em;
         color: var(--ape-text);
+        margin: 0 0 2rem;
       }
-      .what-body {
-        margin: 0;
-        font-family: var(--ape-font-prose);
-        font-size: 1.05rem;
-        line-height: 1.65;
-        color: var(--ape-text-muted);
-      }
-      .what em {
+      .lede strong {
+        font-weight: 400;
         color: var(--ape-amber);
+      }
+      .lede em {
+        font-style: italic;
+        color: var(--ape-text);
+      }
+      .dropcap {
+        float: left;
+        font-family: var(--ape-font-display);
         font-style: normal;
-        font-family: var(--ape-font-mono);
-        font-size: 0.9em;
+        font-size: 4.6em;
+        line-height: 0.85;
+        padding: 0.08em 0.12em 0 0;
+        margin: 0.05em 0.05em 0 0;
+        color: var(--ape-amber);
       }
 
-      .cards-head { margin-bottom: 2.5rem; }
-      .cards-sub {
+      .aside {
+        margin: 2.25rem 0 0;
+        font-family: var(--ape-font-display);
+        font-style: italic;
+        font-size: 1.05rem;
+        line-height: 1.55;
         color: var(--ape-text-muted);
-        font-size: 1rem;
-        line-height: 1.6;
-        max-width: 52rem;
+      }
+      .aside a {
+        color: var(--ape-text-muted);
+        border-bottom: 1px solid var(--ape-border-strong);
+        transition: color 0.18s ease, border-color 0.18s ease;
+      }
+      .aside a:hover {
+        color: var(--ape-amber);
+        border-bottom-color: var(--ape-amber);
+      }
+
+      /* ────────────────  §II — Translation (hero pair + cards)  ──────────────── */
+
+      .big-translation {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        align-items: stretch;
+        margin: 0 0 4rem;
+        padding: 2.25rem 0 2.5rem;
+        border-top: 1px solid var(--ape-border);
+        border-bottom: 1px solid var(--ape-border);
+      }
+      @media (min-width: 860px) {
+        .big-translation {
+          grid-template-columns: 1fr auto 1fr;
+          gap: 2.5rem;
+        }
+      }
+      .big-side {
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+      }
+      .side-tag {
+        font-family: var(--ape-font-mono);
+        font-size: 0.66rem;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        color: var(--ape-text-faint);
         margin: 0;
       }
-      .cards-sub code {
+      .big-prose .side-text {
+        font-family: var(--ape-font-display);
+        font-size: clamp(1.25rem, 1.7vw, 1.45rem);
+        line-height: 1.5;
+        color: var(--ape-text);
+        margin: 0;
+      }
+      .big-glyph .side-text.mono {
+        font-family: var(--ape-font-mono);
+        font-weight: 400;
+        font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+        line-height: 1.7;
+        color: var(--ape-amber);
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        display: block;
+      }
+      .big-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--ape-amber-dim);
+      }
+      @media (max-width: 859px) {
+        .big-divider { padding: 0.5rem 0; }
+      }
+      .big-arrow {
+        font-family: var(--ape-font-mono);
+        font-size: 1.6rem;
+        line-height: 1;
+        color: var(--ape-amber);
+        opacity: 0.7;
+      }
+
+      .translation-blurb {
+        max-width: 52rem;
+        font-family: var(--ape-font-prose);
+        font-size: 1rem;
+        line-height: 1.65;
+        color: var(--ape-text-muted);
+        margin: 0 0 3rem;
+      }
+      .translation-blurb code {
         font-family: var(--ape-font-mono);
         color: var(--ape-amber);
         background: rgba(212, 161, 74, 0.08);
         padding: 0.05em 0.3em;
         border-radius: 3px;
         font-size: 0.95em;
+      }
+      .translation-more {
+        font-family: var(--ape-font-display);
+        font-style: italic;
+        font-size: 1.05rem;
+        color: var(--ape-text-muted);
+        margin: 0 0 1.75rem;
       }
 
       .cards {
@@ -491,21 +610,9 @@ tx:drops→2x_daily_7d|(symptoms→persist>recheck)`}
         .cards { grid-template-columns: repeat(3, 1fr); }
       }
 
-      /* ───────────── Why it matters — editorial manifesto ───────────── */
+      /* ────────────────  §III — Why it matters  ──────────────── */
 
-      .why-editorial {
-        padding: 6rem 0 6.5rem;
-        max-width: 44rem;
-        margin-left: 0;   /* left-anchored — asymmetric against surrounding full-width sections */
-      }
-      .why-eyebrow {
-        font-family: var(--ape-font-mono);
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        letter-spacing: 0.3em;
-        color: var(--ape-amber-dim);
-        margin: 0 0 3rem;
-      }
+      .why { max-width: 46rem; }
       .statements {
         list-style: none;
         padding: 0;
@@ -551,22 +658,17 @@ tx:drops→2x_daily_7d|(symptoms→persist>recheck)`}
         color: var(--ape-amber);
         margin-right: 0.35rem;
       }
-      .statement em {
-        font-style: italic;
-      }
+      .statement em { font-style: italic; }
 
-      /* ───────────── How it ships — terminal manifest ───────────── */
+      /* ────────────────  §IV — Ship manifest  ──────────────── */
 
-      .ship-manifest {
-        padding: 5rem 0 7rem;
-      }
       .terminal-head {
         font-family: var(--ape-font-mono);
         font-weight: 400;
         font-size: 0.95rem;
         letter-spacing: 0.01em;
         color: var(--ape-text);
-        margin: 0 0 2.75rem;
+        margin: 0 0 2.5rem;
         display: inline-flex;
         align-items: baseline;
       }
@@ -620,13 +722,7 @@ tx:drops→2x_daily_7d|(symptoms→persist>recheck)`}
         margin: 0;
         color: var(--ape-text-muted);
       }
-      .manifest .value {
-        color: var(--ape-amber-bright);
-      }
-      .manifest .note {
-        color: var(--ape-text-faint);
-        margin-left: 0.4ch;
-      }
+      .manifest .value { color: var(--ape-amber-bright); }
 
       @media (max-width: 720px) {
         .manifest { padding-left: 1rem; }
@@ -638,8 +734,24 @@ tx:drops→2x_daily_7d|(symptoms→persist>recheck)`}
         .manifest dt { padding-bottom: 0.1rem; }
       }
 
+      /* ────────────────  Reveal animation (essay)  ──────────────── */
+
+      .essay,
+      .big-translation {
+        opacity: 0;
+        transform: translateY(10px);
+        transition:
+          opacity 700ms cubic-bezier(.2,.8,.2,1),
+          transform 700ms cubic-bezier(.2,.8,.2,1);
+      }
+      .essay.visible,
+      .big-translation.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
       @media (prefers-reduced-motion: reduce) {
-        .statement, .manifest .row {
+        .statement, .manifest .row, .essay, .big-translation {
           opacity: 1;
           transform: none;
           transition: none;
@@ -647,36 +759,92 @@ tx:drops→2x_daily_7d|(symptoms→persist>recheck)`}
         .terminal-head .caret { animation: none; }
       }
 
-      .tech { padding: 3rem 0 4rem; }
-      .tech-line {
-        font-family: var(--ape-font-mono);
-        font-size: 0.88rem;
-        color: var(--ape-text-faint);
-        letter-spacing: 0.04em;
-        line-height: 1.7;
-        margin: 0;
-      }
+      /* ────────────────  Footer  ──────────────── */
 
-      footer {
+      .site-footer {
         position: relative;
         z-index: 1;
         border-top: 1px solid var(--ape-border);
-        padding: 1.75rem clamp(1.25rem, 5vw, 3rem);
-        max-width: 68rem;
-        margin: 0 auto;
+        margin-top: 4rem;
+        padding: 4rem clamp(1.25rem, 5vw, 3rem) 2.5rem;
+        max-width: 70rem;
+        margin-left: auto;
+        margin-right: auto;
         width: 100%;
         box-sizing: border-box;
-        text-align: center;
       }
-      footer p {
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      @media (min-width: 760px) {
+        .footer-grid {
+          grid-template-columns: 1.4fr repeat(3, 1fr);
+          gap: 2rem;
+        }
+      }
+      .footer-brand .footer-mark {
+        font-family: var(--ape-font-mono);
+        font-weight: 500;
+        font-size: 1rem;
+        color: var(--ape-text);
+        letter-spacing: 0.03em;
+        margin: 0 0 0.75rem;
+      }
+      .footer-brand .mark-arrow { color: var(--ape-amber); }
+      .footer-tagline {
+        font-family: var(--ape-font-display);
+        font-style: italic;
+        font-size: 1.05rem;
+        line-height: 1.5;
+        color: var(--ape-text-muted);
+        margin: 0 0 0.85rem;
+      }
+      .footer-stack {
         font-family: var(--ape-font-mono);
         font-size: 0.78rem;
+        letter-spacing: 0.05em;
         color: var(--ape-text-faint);
-        letter-spacing: 0.04em;
         margin: 0;
       }
-      footer a { color: var(--ape-text-muted); }
-      footer a:hover { color: var(--ape-amber); }
+      .footer-head {
+        font-family: var(--ape-font-mono);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        color: var(--ape-amber-dim);
+        margin: 0 0 1rem;
+      }
+      .footer-col ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+      }
+      .footer-col a {
+        font-family: var(--ape-font-prose);
+        font-size: 0.92rem;
+        color: var(--ape-text-muted);
+        transition: color 0.18s ease;
+      }
+      .footer-col a:hover { color: var(--ape-amber); }
+
+      .footer-rule {
+        height: 1px;
+        background: var(--ape-border);
+        margin: 3rem 0 1.5rem;
+      }
+      .footer-copy {
+        font-family: var(--ape-font-display);
+        font-style: italic;
+        font-size: 0.92rem;
+        line-height: 1.5;
+        color: var(--ape-text-faint);
+        margin: 0;
+      }
     </style>
 
     <script is:inline>
