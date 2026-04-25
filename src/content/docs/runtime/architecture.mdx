@@ -1,0 +1,108 @@
+---
+title: Runtime architecture
+description: How APE is built, and why the longer you run it, the cheaper it gets.
+---
+
+import PipelineDiagram from '../../../components/PipelineDiagram.astro';
+
+export const nouns = ['time', 'money', 'compute', 'guesswork', 'attention'];
+
+**APE teaches itself.** The longer you run it, the less <span class="rotator" aria-label="time, money, compute, guesswork, or attention"><span class="reserver" aria-hidden="true">guesswork</span><span class="cycle" aria-hidden="true"><span>time</span><span>money</span><span>compute</span><span>guesswork</span><span>attention</span></span></span> it costs.
+
+That's not a marketing line — it's how the translator is built. Every time the
+heavy model steps in to fix a case the light model got wrong, the correction
+becomes a regex pattern and gets written back to the database. The zero-cost
+path grows with use.
+
+## The self-teaching pipeline
+
+APE translates prose into glyph through three levels. The cheap ones handle
+what they've already learned; the expensive one steps in when they haven't —
+and it leaves the cheap ones smarter on the way out.
+
+<PipelineDiagram />
+
+- **L1 — regex first, model second.** Incoming content is first matched
+  against the regex patterns in APE's database. Pattern hits cost zero LLM
+  tokens. If nothing matches, a small purpose-trained translator model
+  produces the glyph.
+- **L2 — validate against memory.** L1's output is checked against the
+  existing corpus via semantic search. If the new glyph overlaps meaningfully
+  with what APE already knows, it's accepted.
+- **L3 — a teacher model that writes code.** When L2 rejects, a stronger
+  model retranslates the input *and* writes new regex patterns back to the
+  database. The next time a similar shape arrives, L1 catches it for free.
+
+The loop is the point. L3 is expensive; L1 is free. Every L3 call is a
+down-payment on future L1 savings.
+
+## Other pieces
+
+- **Gateway.** HTTP front door. Hosts the MCP endpoint, OAuth surfaces,
+  and proxy APIs. Host allowlist and CSP are hot-reloadable.
+- **Providers.** Native modules for upstream LLMs — Anthropic, OpenAI,
+  local model servers.
+- **Embedder.** Glyph-aware, 384-dim Matryoshka, loaded as ONNX. Vector
+  identity lives in Qdrant.
+- **Graph.** Nodes and edges in SQLite. Traversal, search, and mutation
+  are exposed over MCP.
+- **MCP server.** Native Model Context Protocol endpoint. Tools like
+  `add` and search are what agents actually call.
+
+## Data plane
+
+| Store      | Role                                              |
+|------------|---------------------------------------------------|
+| SQLite     | Graph nodes, edges, corpus records, auth, config. |
+| Qdrant     | Dense vector index for glyph embeddings.          |
+| Filesystem | Model weights, L1 prompt templates.               |
+
+## Deployment shape
+
+One binary plus SQLite, Qdrant, and a model directory. The gateway handles
+TLS and the MCP/HTTP surface; everything else runs internally.
+
+<style>{`
+  .rotator {
+    position: relative;
+    display: inline-block;
+    color: var(--ape-amber);
+    font-style: normal;
+    vertical-align: baseline;
+  }
+  .rotator .reserver {
+    visibility: hidden;
+    display: inline-block;
+  }
+  .rotator .cycle {
+    position: absolute;
+    inset: 0;
+    display: inline-block;
+  }
+  .rotator .cycle > span {
+    position: absolute;
+    inset: 0;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(0.35em);
+    animation: ape-rotate 15s cubic-bezier(.6,.05,.4,.95) infinite;
+  }
+  .rotator .cycle > span:nth-child(1) { animation-delay: 0s; }
+  .rotator .cycle > span:nth-child(2) { animation-delay: 3s; }
+  .rotator .cycle > span:nth-child(3) { animation-delay: 6s; }
+  .rotator .cycle > span:nth-child(4) { animation-delay: 9s; }
+  .rotator .cycle > span:nth-child(5) { animation-delay: 12s; }
+
+  @keyframes ape-rotate {
+    0%   { opacity: 0; transform: translateY(0.35em); }
+    3%   { opacity: 1; transform: translateY(0); }
+    17%  { opacity: 1; transform: translateY(0); }
+    20%  { opacity: 0; transform: translateY(-0.35em); }
+    100% { opacity: 0; transform: translateY(-0.35em); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rotator .cycle > span { animation: none; }
+    .rotator .cycle > span:nth-child(1) { opacity: 1; transform: none; }
+  }
+`}</style>

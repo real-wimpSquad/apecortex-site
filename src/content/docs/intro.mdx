@@ -1,0 +1,39 @@
+---
+title: What is APE?
+description: The shape of the system — what it does, why it exists, how to think about it.
+---
+
+APE is the **Agent Persistence Exocortex**: a self-hosted memory layer designed to sit
+alongside AI agents and remember for them.
+
+Agents as they ship today are stateless. Every conversation starts from nothing. Every
+tool call forgets what the last one learned. Every model upgrade wipes the slate.
+APE's job is to hold the state they don't.
+
+## The shape
+
+Three moving parts, end to end:
+
+- **Translator.** Incoming prose is compressed into *glyph* — a dense, operator-based
+  notation where every fact survives but the representation shrinks.
+- **Graph.** Glyph is stored as nodes and edges, not flat text. Relationships are
+  first-class. Retrieval is structural, not just semantic.
+- **Retrieval.** When an agent needs context, it queries the graph — by topic, by
+  time, by relationship. Results come back as glyph, ready to drop into a prompt,
+  or re-expanded to prose if a human is reading.
+
+## What APE is not
+
+- Not a vector store. (It uses one — embeddings live in Qdrant — but that's plumbing.)
+- Not a RAG framework. RAG assumes you have documents. APE assumes you have a life.
+- Not a prompt cache. Prompt caches speed up a single session. APE persists across them.
+
+## Who it's for
+
+Anyone building agents that should get smarter the more you use them — and not reset
+every time a new context window opens.
+
+Dig deeper:
+
+- [Glyph primer](/glyph-primer) — the seven operators and what they mean
+- [Runtime architecture](/runtime/architecture) — how the Rust service fits together

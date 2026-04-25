@@ -1,0 +1,123 @@
+---
+interface Props {
+  eyebrow: string;
+  prose: string;
+  glyph: string;
+  back: string;
+}
+
+const { eyebrow, prose, glyph, back } = Astro.props;
+---
+
+<article class="card">
+  <p class="eyebrow">{eyebrow}</p>
+
+  <div class="row row-prose">
+    <span class="label">prose in</span>
+    <p class="prose">{prose}</p>
+  </div>
+
+  <div class="step" aria-hidden="true">
+    <span class="line"></span>
+    <span class="chip">translate →</span>
+    <span class="line"></span>
+  </div>
+
+  <div class="row row-glyph">
+    <span class="label">glyph</span>
+    <code class="glyph">{glyph}</code>
+  </div>
+
+  <div class="step" aria-hidden="true">
+    <span class="line"></span>
+    <span class="chip">expand →</span>
+    <span class="line"></span>
+  </div>
+
+  <div class="row row-back">
+    <span class="label">prose out</span>
+    <p class="back">{back}</p>
+  </div>
+</article>
+
+<style>
+  .card {
+    background: var(--ape-bg-card);
+    border: 1px solid var(--ape-border);
+    border-radius: 8px;
+    padding: 1.75rem 1.75rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+  .card:hover {
+    border-color: var(--ape-border-strong);
+    transform: translateY(-2px);
+  }
+
+  .eyebrow {
+    font-family: var(--ape-font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ape-amber-dim);
+    margin: 0 0 0.5rem;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .label {
+    font-family: var(--ape-font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ape-text-faint);
+  }
+  .prose,
+  .back {
+    margin: 0;
+    font-family: var(--ape-font-prose);
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+  .prose { color: var(--ape-text); }
+  .back  { color: var(--ape-text-muted); }
+
+  .glyph {
+    font-family: var(--ape-font-mono);
+    font-size: 0.9rem;
+    color: var(--ape-amber);
+    background: transparent;
+    padding: 0;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .step {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.15rem 0;
+  }
+  .step .line {
+    flex: 1;
+    height: 1px;
+    background: var(--ape-border);
+  }
+  .step .chip {
+    font-family: var(--ape-font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ape-text-faint);
+    padding: 0.18rem 0.55rem;
+    border: 1px solid var(--ape-border);
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+</style>

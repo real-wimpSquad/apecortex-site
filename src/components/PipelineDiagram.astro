@@ -1,0 +1,145 @@
+---
+// L1 → L2 → accepted pipeline, with L3 as a fallback that writes new regex
+// patterns back to L1. The teaching loop (L3 → L1) uses an animated amber
+// dashed path to read as a continuous, live cycle.
+---
+
+<figure class="pipeline" aria-labelledby="pipeline-title" aria-describedby="pipeline-desc">
+  <svg viewBox="0 0 680 360" role="img" preserveAspectRatio="xMidYMid meet">
+    <title id="pipeline-title">APE's three-level translation pipeline</title>
+    <desc id="pipeline-desc">
+      L1 translates input using regex patterns first, then a small model.
+      L2 validates L1's output. If L2 fails, L3 retranslates and writes
+      new regex patterns back to L1. This self-teaching loop is why APE
+      gets cheaper the longer you run it.
+    </desc>
+
+    <defs>
+      <marker id="tri" viewBox="0 0 10 10" refX="9" refY="5"
+              markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
+      </marker>
+    </defs>
+
+    <!-- input -->
+    <text x="140" y="34" class="label-in">input</text>
+    <path d="M 140 42 L 140 58" class="arrow-in" marker-end="url(#tri)" />
+
+    <!-- L1 box -->
+    <rect x="60" y="60" width="160" height="80" rx="6" class="box" />
+    <text x="140" y="94" class="stage">L1</text>
+    <text x="140" y="118" class="sub">regex → model</text>
+
+    <!-- L1 → L2 -->
+    <path d="M 222 100 L 276 100" class="arrow-primary" marker-end="url(#tri)" />
+
+    <!-- L2 box -->
+    <rect x="280" y="60" width="160" height="80" rx="6" class="box" />
+    <text x="360" y="94" class="stage">L2</text>
+    <text x="360" y="118" class="sub">validate</text>
+
+    <!-- L2 → accepted -->
+    <path d="M 442 100 L 540 100" class="arrow-primary" marker-end="url(#tri)" />
+    <text x="588" y="105" class="label-out">accepted</text>
+
+    <!-- L2 → L3 (fails) -->
+    <path d="M 360 142 L 360 218" class="arrow-fallback" marker-end="url(#tri)" />
+    <text x="370" y="184" class="arrow-label">fails</text>
+
+    <!-- L3 box -->
+    <rect x="280" y="220" width="160" height="80" rx="6" class="box" />
+    <text x="360" y="254" class="stage">L3</text>
+    <text x="360" y="278" class="sub">teacher</text>
+
+    <!-- L3 → L1 write-back loop -->
+    <path d="M 280 260 Q 140 260 140 142" class="arrow-teach" marker-end="url(#tri)" />
+    <text x="156" y="236" class="arrow-label teach">writes new regex patterns</text>
+  </svg>
+</figure>
+
+<style>
+  .pipeline {
+    margin: 2rem 0 1.5rem;
+    padding: 0;
+    max-width: 100%;
+  }
+  .pipeline svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    font-family: var(--ape-font-mono, ui-monospace, monospace);
+  }
+
+  .box {
+    fill: var(--ape-bg-card, #1a1612);
+    stroke: var(--ape-border, #26201a);
+    stroke-width: 1;
+  }
+  .stage {
+    fill: var(--ape-amber, #d4a14a);
+    font-size: 20px;
+    font-weight: 500;
+    text-anchor: middle;
+    letter-spacing: 0.04em;
+  }
+  .sub {
+    fill: var(--ape-text-muted, #8a8379);
+    font-size: 12px;
+    text-anchor: middle;
+    letter-spacing: 0.03em;
+  }
+
+  .label-in, .label-out {
+    fill: var(--ape-text-muted, #8a8379);
+    font-size: 12px;
+    text-anchor: middle;
+    letter-spacing: 0.04em;
+  }
+  .label-out { text-anchor: start; fill: var(--ape-amber-bright, #e8b768); }
+
+  .arrow-in,
+  .arrow-primary {
+    fill: none;
+    stroke: var(--ape-amber-dim, #8a6730);
+    stroke-width: 1.5;
+    color: var(--ape-amber-dim, #8a6730);
+  }
+
+  .arrow-fallback {
+    fill: none;
+    stroke: var(--ape-text-faint, #4a453e);
+    stroke-width: 1;
+    stroke-dasharray: 3 3;
+    color: var(--ape-text-faint, #4a453e);
+  }
+
+  .arrow-teach {
+    fill: none;
+    stroke: var(--ape-amber, #d4a14a);
+    stroke-width: 1.75;
+    stroke-dasharray: 6 4;
+    color: var(--ape-amber, #d4a14a);
+    animation: pipeline-flow 1.6s linear infinite;
+  }
+  @keyframes pipeline-flow {
+    to { stroke-dashoffset: -20; }
+  }
+
+  .arrow-label {
+    fill: var(--ape-text-faint, #4a453e);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .arrow-label.teach {
+    fill: var(--ape-amber, #d4a14a);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .arrow-teach { animation: none; }
+  }
+</style>

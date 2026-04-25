@@ -1,0 +1,32 @@
+/* Map Starlight's theme variables onto APE's palette so docs feel like the landing. */
+
+:root,
+:root[data-theme='dark'] {
+  --sl-color-accent-low: #3a2a12;
+  --sl-color-accent: #d4a14a;
+  --sl-color-accent-high: #f0ceab;
+
+  --sl-color-white: #f6efe3;
+  --sl-color-gray-1: #e8e0d4;
+  --sl-color-gray-2: #c8bfb2;
+  --sl-color-gray-3: #8a8379;
+  --sl-color-gray-4: #5a544b;
+  --sl-color-gray-5: #3a3128;
+  --sl-color-gray-6: #26201a;
+
+  --sl-color-black: #0b0908;
+  --sl-color-bg-nav: #0e0c0a;
+  --sl-color-bg-sidebar: #0b0908;
+
+  --sl-font: var(--ape-font-prose);
+  --sl-font-mono: var(--ape-font-mono);
+}
+
+/* Subtle amber tint on inline code so glyph reads like glyph. */
+:root .sl-markdown-content code:not(pre code) {
+  color: var(--ape-amber);
+  background: rgba(212, 161, 74, 0.08);
+  border: 1px solid rgba(212, 161, 74, 0.15);
+  border-radius: 3px;
+  padding: 0.1em 0.35em;
+}

@@ -1,0 +1,35 @@
+---
+// Custom Starlight site title: keeps the home link back to the landing page
+// rather than staying inside the docs tree.
+---
+
+<a href="/" class="site-title">
+  <span class="mark" aria-hidden="true">→</span>
+  <span class="name">APE</span>
+  <span class="sub">docs</span>
+</a>
+
+<style>
+  .site-title {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    color: var(--ape-text);
+    text-decoration: none;
+    font-family: var(--ape-font-mono);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .mark {
+    color: var(--ape-amber);
+    font-size: 1.1em;
+  }
+  .name {
+    font-weight: 600;
+  }
+  .sub {
+    color: var(--ape-text-muted);
+    font-size: 0.85em;
+    font-weight: 400;
+  }
+</style>

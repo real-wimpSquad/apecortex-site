@@ -1,0 +1,114 @@
+---
+title: Glyph primer
+description: What glyph is, why any model can read it, and how to think about it in three minutes.
+---
+
+Glyph is APE's internal notation. It's **translation, not compression** —
+every name, date, place, and number survives. What disappears is English
+filler. What replaces it is **operators**: symbols borrowed from math,
+logic, and set theory that encode relationships directly.
+
+```
+(day:Tue_standup)Priya→flagged:auth_bug=P0>blocks:launch
+```
+
+*On Tuesday's standup, Priya flagged the auth bug — a P0 that blocks launch.*
+
+## Any model can read it
+
+This is the feature that matters most.
+
+Glyph is not a specification you have to teach a model. It's an **expression
+language** — its operators are symbols whose meanings are already common
+property. `→` means flow. `¬` means not. `⊂` means subset. `∃` means
+"there exists." A pretrained LLM that has never seen a line of glyph still
+reads `crash→startup|trigger:v2.4_update` and understands it — the same way
+you read an equation in a paper you've never cracked. The operators are
+self-evidencing.
+
+That portability is the whole point. Memories written as glyph today are
+readable by the model you use tomorrow, the one after that, and the
+open-weight successor you self-host when a vendor pivots. Your cortex
+outlives the model.
+
+## The operator set is open
+
+There's no fixed alphabet. The translator reaches for the most precise
+operator for each relationship and coins a new one when nothing existing
+fits. A taste of what glyph leans on:
+
+| Category  | Operators                                                                               |
+|-----------|-----------------------------------------------------------------------------------------|
+| Flow      | `→` causes · `↔` reciprocal · `⇒` implies · `Δ` changes                                 |
+| Equality  | `:` property · `=` equals · `≡` identical · `≈` approximately                           |
+| Logic     | `¬` not · `∧` and · `∨` or · `⊂` subset · `∃` exists · `∀` for all · `⊥` undefined      |
+| Structure | `( )` qualifier · `[a\|b]` bundle · `=N:[…]` cardinality · `a..b` range                 |
+| Glue      | `_` joins tokens inside a word · `\|` marks parallel items                              |
+
+## Two rules
+
+1. **No spaces, no filler.** Use `_` to join words inside a token. Drop
+   articles and copulas (*the, is, are, with, and, or, for…*).
+2. **Preserve the real stuff.** Names, dates, numbers, identifiers —
+   verbatim.
+
+Everything else follows from picking the most precise operator available.
+
+## Two from the corpus
+
+Short examples tell you the rules. These two show the reach. Both are
+real records from the corpus APE's boutique models trained on — the prose
+on top is the human source, the glyph below is what the translator
+learned to produce.
+
+### The halting problem
+
+> The halting problem is a fundamental theorem in computability theory,
+> proven by Alan Turing in 1936. It demonstrates that there is no general
+> algorithm capable of determining whether an arbitrary computer program
+> will eventually finish running or continue forever. This undecidability
+> is established through a proof by contradiction involving a
+> self-referential machine. If such a decider existed, one could construct
+> a machine that halts if and only if it does not halt, creating a logical
+> paradox. Consequently, the problem defines the absolute boundaries of
+> what can be computed by any Turing machine.
+
+Becomes:
+
+```
+halting_problem(computability_theory)⊂theorem
+proven_by:Alan_Turing(1936)
+∃[decider(arbitrary_program)→{finishes|forever}]⇒¬∃(general_algorithm)
+proof:[contradiction(self-referential_machine)]→[if(decider)⇒exists(machine):halts↔¬halts]→paradox
+halting_problem=boundaries(computable_by:Turing_machine)
+```
+
+Notice `halts↔¬halts` — the paradox itself, rendered as a single
+biconditional between an assertion and its negation. Five lines carry a
+theorem, its author, its proof structure, and its consequence.
+
+### The French Revolution
+
+> The French Revolution (1789-1799) wasn't a spontaneous eruption, but the
+> culmination of decades of systemic inequality. Decades of lavish royal
+> spending, coupled with costly wars (like supporting the American
+> Revolution), had drained the national treasury. This, combined with a
+> rigid feudal system where the Third Estate (commoners) bore the brunt of
+> taxation while the nobility and clergy enjoyed exemptions, fostered deep
+> resentment. Enlightenment ideals — emphasizing reason, individual rights,
+> and popular sovereignty — provided a philosophical framework for
+> challenging the status quo. The immediate trigger was a severe famine in
+> 1788, leading to widespread bread riots. This sparked the storming of
+> the Bastille, escalating into a revolution that ultimately toppled the
+> monarchy, but devolved into the Reign of Terror, highlighting the
+> dangers of unchecked revolutionary fervor.
+
+Becomes:
+
+```
+French_Revolution(1789..1799)={[royal_spending|costly_wars(American_Revolution)]→national_treasury(drain)∧rigid_feudal_system(Third_Estate(taxation_burden)↔[nobility|clergy](exemptions)⇒resentment)|Enlightenment_ideals(reason|individual_rights|popular_sovereignty)→philosophical_framework}∧famine(1788)→bread_riots→storming_of_the_Bastille→revolution(topple_monarchy)→Reign_of_Terror(unchecked_revolutionary_fervor)
+```
+
+Notice `1789..1799` — a decade as a range operator — and the final causal
+chain, `storming_of_the_Bastille → revolution(topple_monarchy) → Reign_of_Terror`.
+A decade of history folded into one expression.
