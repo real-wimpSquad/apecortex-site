@@ -1,7 +1,6 @@
 ---
 import GlyphField from '../components/GlyphField.astro';
 import GlyphCard from '../components/GlyphCard.astro';
-import '../styles/tokens.css';
 ---
 
 <html lang="en">
@@ -27,6 +26,8 @@ import '../styles/tokens.css';
     <meta property="og:image:height" content="1200" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://apecortex.com/og-ape.jpg" />
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,8 +61,9 @@ import '../styles/tokens.css';
           <span class="accent">stateless.</span>
         </h1>
         <p class="hero-sub">
-          A persistent, compressed memory layer for AI agents — across sessions,
-          models, and vendors. Self-hosted. Translation-based. Yours.
+          Stateless agents forget. APE remembers — a self-hosted layer that
+          translates what passes through, stores it as a graph, and outlives
+          the session, the model, and the vendor. Yours.
         </p>
         <div class="cta-row">
           <a class="cta primary" href="/intro">Read the docs →</a>
@@ -116,19 +118,22 @@ import '../styles/tokens.css';
 
           <div class="big-side big-glyph">
             <p class="side-tag">glyph</p>
-            <code class="side-text mono">{`(day:Tue_standup)Priya→flagged:auth_bug=P0>blocks:launch
-unblock→[security_signoff∧QA_rerun]
-plan:hotfix→Friday|(slip→rollback)`}</code>
+            <code class="side-text mono">{`(day:Tue_standup)Priya⪽auth_bug{priority:P0}⊣launch
+[security_signoff∧QA_rerun]⇒auth_bug⊖
+hotfix{deadline:Friday}|hotfix∌deadline⇒rollback`}</code>
           </div>
         </div>
 
         <p class="translation-blurb">
-          The operator set is open. Glyph reaches for the most precise symbol —
-          <code>→</code> flow, <code>¬</code> negation, <code>∧</code> joint
-          requirement, <code>⊂</code> containment, <code>∃</code> existence,
-          <code>≡</code> equivalence — borrowing from math and logic, coining new
-          ones when nothing fits. Every fact survives; only the representation
-          changes.
+          One rule: <strong>nouns are nucleoids, everything else is an
+          operator.</strong> Entities sit on the page; the relations between
+          them are symbols — <code>→</code> causes, <code>⊣</code> blocks,
+          <code>∧</code> joint requirement, <code>∈</code> belongs to,
+          <code>≡</code> equivalent, <code>⊕</code> create, <code>⊖</code>
+          destroy. The alphabet is closed; when a source claim falls outside
+          it, the translator surfaces the gap as <code>MISSING</code> rather
+          than coining its way around it. Every fact survives; only the
+          representation changes.
         </p>
 
         <p class="translation-more">— And in other shapes:</p>
@@ -137,25 +142,26 @@ plan:hotfix→Friday|(slip→rollback)`}</code>
           <GlyphCard
             eyebrow="Bug report"
             prose="The app crashes on startup after the 2.4 update. Affects every iPhone older than the 12. Android and iPad are unaffected. Crash rate jumped from 0.1% to 8% overnight."
-            glyph={`crash→startup|trigger:v2.4_update
-scope:iPhone(pre_12)|¬scope:[Android|iPad]
-crash_rate:0.1%..8%(overnight)`}
+            glyph={`v2.4_update→crash@startup
+crash→[⊚iPhone(pre_12)|∌[Android|iPad]]
+crash_rate{range:0.1%..8%}@overnight`}
             back="Startup crash after v2.4; affects every pre-12 iPhone; Android and iPad unaffected; crash rate jumped 0.1% → 8% overnight."
           />
           <GlyphCard
             eyebrow="Vet visit"
             prose="Took Mia (our Shiba) to the vet this morning. Low-grade ear infection — same strain as last spring, nothing serious. Drops twice daily for a week; if symptoms persist, recheck."
-            glyph={`(date:today_AM)Mia(Shiba)→vet
-dx:ear_infection(low_grade)≡last_spring_strain|¬serious
-tx:drops→2x_daily_7d|(symptoms→persist>recheck)`}
+            glyph={`(date:today_AM)Mia(Shiba)@vet
+ear_infection(low_grade){severity:¬serious}≡last_spring_strain
+drops{freq:2x_daily|dur:7d}
+symptoms(persistent)⇒recheck`}
             back="Vet with Mia (our Shiba), this morning — low-grade ear infection, equivalent to last spring's strain, not serious; drops twice daily for a week; recheck if symptoms persist."
           />
           <GlyphCard
             eyebrow="Travel note"
             prose="Booked the Lisbon trip for the first week of October. Direct flight outbound, one stop in Madrid coming back. Hotel in Alfama; rail day-trip to Sintra mid-week if the weather holds."
-            glyph={`trip:Lisbon→Oct_W1
-flight:[outbound→direct|return→1_stop(Madrid)]
-stay:Alfama|rail→Sintra(mid_week)|cond:weather_holds`}
+            glyph={`Lisbon_trip{date:Oct_W1|hotel:Alfama}
+outbound_flight{stops:0}|return_flight{stops:1|via:Madrid}
+weather_holds⇒rail_daytrip→Sintra@mid_week`}
             back="Lisbon, first week of October — direct out, one stop via Madrid back; staying in Alfama, day-trip by rail to Sintra mid-week if weather holds."
           />
         </div>
@@ -211,7 +217,7 @@ stay:Alfama|rail→Sintra(mid_week)|cond:weather_holds`}
         <dl class="manifest">
           <div class="row" data-reveal style="--i:0">
             <dt>--airgap-or-api</dt>
-            <dd>run local with your own models, or plug into <span class="value">Claude</span>, <span class="value">ChatGPT</span>, or <span class="value">Grok</span></dd>
+            <dd>run fully airgapped locally, or plug in <span class="value">Claude</span>, <span class="value">ChatGPT</span>, or <span class="value">Grok</span></dd>
           </div>
           <div class="row" data-reveal style="--i:1">
             <dt>--no-build</dt>
@@ -219,7 +225,7 @@ stay:Alfama|rail→Sintra(mid_week)|cond:weather_holds`}
           </div>
           <div class="row" data-reveal style="--i:2">
             <dt>--install-time</dt>
-            <dd><span class="value">≈ 60s</span> — one command, one config file</dd>
+            <dd><span class="value">≈ 60s</span> — one command and you are functional. Full GUI config for Enterprise needs</dd>
           </div>
           <div class="row" data-reveal style="--i:3">
             <dt>--subscriptions</dt>
@@ -227,11 +233,11 @@ stay:Alfama|rail→Sintra(mid_week)|cond:weather_holds`}
           </div>
           <div class="row" data-reveal style="--i:4">
             <dt>--mcp-native</dt>
-            <dd>Claude Code, Claude Desktop, or any MCP-capable client you build</dd>
+            <dd>Claude Code, ChatGPT, LM Studio. Any MCP-capable client</dd>
           </div>
           <div class="row" data-reveal style="--i:5">
             <dt>--vendor-agnostic</dt>
-            <dd>swap providers without migrating memories. the cortex outlives the model</dd>
+            <dd>swap providers and model families without migrating memories. the cortex outlives the model</dd>
           </div>
           <div class="row" data-reveal style="--i:6">
             <dt>--ops-surface</dt>

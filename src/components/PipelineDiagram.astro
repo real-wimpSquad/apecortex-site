@@ -22,38 +22,38 @@
     </defs>
 
     <!-- input -->
-    <text x="140" y="34" class="label-in">input</text>
-    <path d="M 140 42 L 140 58" class="arrow-in" marker-end="url(#tri)" />
+    <text x="140" y="34" class="label-in" aria-label="input">input</text>
+    <path d="M 140 42 L 140 58" class="arrow-in" marker-end="url(#tri)" aria-label="flow from input" />
 
     <!-- L1 box -->
-    <rect x="60" y="60" width="160" height="80" rx="6" class="box" />
-    <text x="140" y="94" class="stage">L1</text>
-    <text x="140" y="118" class="sub">regex → model</text>
+    <rect x="60" y="60" width="160" height="80" rx="6" class="box" aria-label="L1 stage: regex to model" />
+    <text x="140" y="94" class="stage" aria-label="L1">L1</text>
+    <text x="140" y="118" class="sub" aria-label="regex to model">regex → model</text>
 
     <!-- L1 → L2 -->
-    <path d="M 222 100 L 276 100" class="arrow-primary" marker-end="url(#tri)" />
+    <path d="M 222 100 L 276 100" class="arrow-primary" marker-end="url(#tri)" aria-label="L1 to L2" />
 
     <!-- L2 box -->
-    <rect x="280" y="60" width="160" height="80" rx="6" class="box" />
-    <text x="360" y="94" class="stage">L2</text>
-    <text x="360" y="118" class="sub">validate</text>
+    <rect x="280" y="60" width="160" height="80" rx="6" class="box" aria-label="L2 stage: validate" />
+    <text x="360" y="94" class="stage" aria-label="L2">L2</text>
+    <text x="360" y="118" class="sub" aria-label="validate">validate</text>
 
     <!-- L2 → accepted -->
-    <path d="M 442 100 L 540 100" class="arrow-primary" marker-end="url(#tri)" />
-    <text x="588" y="105" class="label-out">accepted</text>
+    <path d="M 442 100 L 540 100" class="arrow-primary" marker-end="url(#tri)" aria-label="L2 to accepted output" />
+    <text x="588" y="105" class="label-out" aria-label="accepted">accepted</text>
 
     <!-- L2 → L3 (fails) -->
-    <path d="M 360 142 L 360 218" class="arrow-fallback" marker-end="url(#tri)" />
-    <text x="370" y="184" class="arrow-label">fails</text>
+    <path d="M 360 142 L 360 218" class="arrow-fallback" marker-end="url(#tri)" aria-label="L2 to L3 when validation fails" />
+    <text x="370" y="184" class="arrow-label" aria-label="fails">fails</text>
 
     <!-- L3 box -->
-    <rect x="280" y="220" width="160" height="80" rx="6" class="box" />
-    <text x="360" y="254" class="stage">L3</text>
-    <text x="360" y="278" class="sub">teacher</text>
+    <rect x="280" y="220" width="160" height="80" rx="6" class="box" aria-label="L3 stage: teacher" />
+    <text x="360" y="254" class="stage" aria-label="L3">L3</text>
+    <text x="360" y="278" class="sub" aria-label="teacher">teacher</text>
 
     <!-- L3 → L1 write-back loop -->
-    <path d="M 280 260 Q 140 260 140 142" class="arrow-teach" marker-end="url(#tri)" />
-    <text x="156" y="236" class="arrow-label teach">writes new regex patterns</text>
+    <path d="M 280 260 Q 140 260 140 142" class="arrow-teach" marker-end="url(#tri)" aria-label="L3 writes new regex patterns back to L1" />
+    <text x="156" y="236" class="arrow-label teach" aria-label="writes new regex patterns">writes new regex patterns</text>
   </svg>
 </figure>
 

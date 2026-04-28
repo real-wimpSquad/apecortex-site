@@ -28,6 +28,12 @@ export default defineConfig({
             { label: 'Architecture', slug: 'runtime/architecture' },
           ],
         },
+        {
+          label: 'Apocrypha',
+          items: [
+            { label: 'Origin', slug: 'origin' },
+          ],
+        },
       ],
       customCss: ['./src/styles/tokens.css', './src/styles/starlight-theme.css'],
       components: {
