@@ -1,0 +1,36 @@
+---
+// Custom Starlight Root component
+// Adds global theme synchronization to match our CSS variables
+import { Head } from '@astrojs/starlight/components';
+
+interface Props {
+  children: any;
+  lang?: string;
+  dir?: 'ltr' | 'rtl' | 'auto';
+}
+
+const { children, lang = 'en', dir = 'ltr' } = Astro.props;
+---
+
+<html lang={lang} dir={dir} data-theme="dark">
+  <head>
+    <Head />
+    <!-- Theme initialization - Starlight handles theme via its own script,
+         but we need to ensure data-theme is set before our CSS loads -->
+    <script is:inline>
+      (() => {
+        const html = document.documentElement;
+        const stored = localStorage.getItem('starlight-theme') ||
+          (document.cookie.match(/starlight-theme=([^;]+)/) || [])[1];
+        if (stored) {
+          html.setAttribute('data-theme', stored);
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          html.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    {children}
+  </body>
+</html>

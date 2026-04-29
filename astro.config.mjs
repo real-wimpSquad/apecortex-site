@@ -3,7 +3,8 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  site: 'https://apecortex.com',
+  site: 'https://real-wimpsquad.github.io',
+  base: '/apecortex-site',
   integrations: [
     starlight({
       title: 'APE',
@@ -37,6 +38,7 @@ export default defineConfig({
       ],
       customCss: ['./src/styles/tokens.css', './src/styles/starlight-theme.css'],
       components: {
+        Root: './src/layouts/StarlightRoot.astro',
         SiteTitle: './src/components/SiteTitle.astro',
       },
     }),

@@ -23,3 +23,34 @@
   --ape-font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   --ape-font-display: 'Instrument Serif', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
 }
+
+/* Light mode: warm paper, burnt-amber ink. */
+:root[data-theme='light'] {
+  /* Cream paper. Card lifts lighter than page so it reads as raised. */
+  --ape-bg: #ede2c8;
+  --ape-bg-raised: #e5d8b9;
+  --ape-bg-card: #fbf5e6;
+
+  /* Amber, shifted deep enough to read on cream. Bright = more contrast,
+     dim = quieter — same semantics as dark mode, opposite direction. */
+  --ape-amber: #9a4d0c;
+  --ape-amber-bright: #6f3608;
+  --ape-amber-dim: #b8722a;
+
+  /* Dark warm ink. */
+  --ape-text: #1c1812;
+  --ape-text-muted: #4d463c;
+  --ape-text-faint: #7d7468;
+
+  --ape-border: #b8a98b;
+  --ape-border-strong: #8a7a5e;
+
+  /* Soft shadow for raised surfaces (cards, etc.). Unused in dark mode. */
+  --ape-shadow-card: 0 1px 2px rgba(60, 40, 15, 0.06),
+                     0 8px 24px rgba(60, 40, 15, 0.08);
+}
+
+:root:not([data-theme]),
+:root[data-theme='dark'] {
+  --ape-shadow-card: none;
+}

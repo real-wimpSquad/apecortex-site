@@ -1,6 +1,6 @@
 /* Map Starlight's theme variables onto APE's palette so docs feel like the landing. */
 
-:root,
+:root:not([data-theme]),
 :root[data-theme='dark'] {
   --sl-color-accent-low: #3a2a12;
   --sl-color-accent: #d4a14a;
@@ -22,6 +22,30 @@
   --sl-font-mono: var(--ape-font-mono);
 }
 
+/* Light mode: warm paper, burnt-amber ink */
+:root[data-theme='light'] {
+  --sl-color-accent-low: #e8c694;
+  --sl-color-accent: #9a4d0c;
+  --sl-color-accent-high: #2a1808;
+
+  /* Backgrounds (light) */
+  --sl-color-white: #ede2c8;
+  --sl-color-gray-6: #e5d8b9;
+  --sl-color-gray-5: #b8a98b;
+  --sl-color-gray-4: #8a7a5e;
+  --sl-color-gray-3: #7d7468;
+  --sl-color-gray-2: #4d463c;
+  --sl-color-gray-1: #2a241d;
+
+  /* Text/foreground (dark) */
+  --sl-color-black: #1c1812;
+  --sl-color-bg-nav: #e5d8b9;
+  --sl-color-bg-sidebar: #ede2c8;
+
+  --sl-font: var(--ape-font-prose);
+  --sl-font-mono: var(--ape-font-mono);
+}
+
 /* Subtle amber tint on inline code so glyph reads like glyph. */
 :root .sl-markdown-content code:not(pre code) {
   color: var(--ape-amber);
@@ -29,4 +53,8 @@
   border: 1px solid rgba(212, 161, 74, 0.15);
   border-radius: 3px;
   padding: 0.1em 0.35em;
+}
+:root[data-theme='light'] .sl-markdown-content code:not(pre code) {
+  background: rgba(154, 77, 12, 0.07);
+  border-color: rgba(154, 77, 12, 0.18);
 }
