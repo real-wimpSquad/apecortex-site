@@ -41,6 +41,7 @@
 
   /* Backgrounds (light, used as Starlight's "black") */
   --sl-color-black: #ede2c8;
+  --sl-color-bg: #ede2c8;
   --sl-color-bg-nav: #e5d8b9;
   --sl-color-bg-sidebar: #ede2c8;
 
