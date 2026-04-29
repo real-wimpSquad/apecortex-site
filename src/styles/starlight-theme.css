@@ -22,23 +22,25 @@
   --sl-font-mono: var(--ape-font-mono);
 }
 
-/* Light mode: warm paper, burnt-amber ink */
+/* Light mode: warm paper, burnt-amber ink.
+   Starlight uses --sl-color-white as the strongest TEXT color and
+   --sl-color-black as the page BACKGROUND, so values invert vs. dark mode. */
 :root[data-theme='light'] {
   --sl-color-accent-low: #e8c694;
   --sl-color-accent: #9a4d0c;
   --sl-color-accent-high: #2a1808;
 
-  /* Backgrounds (light) */
-  --sl-color-white: #ede2c8;
-  --sl-color-gray-6: #e5d8b9;
-  --sl-color-gray-5: #b8a98b;
-  --sl-color-gray-4: #8a7a5e;
-  --sl-color-gray-3: #7d7468;
-  --sl-color-gray-2: #4d463c;
+  /* Text/foreground (dark, used as Starlight's "white") */
+  --sl-color-white: #1c1812;
   --sl-color-gray-1: #2a241d;
+  --sl-color-gray-2: #4d463c;
+  --sl-color-gray-3: #7d7468;
+  --sl-color-gray-4: #8a7a5e;
+  --sl-color-gray-5: #b8a98b;
+  --sl-color-gray-6: #e5d8b9;
 
-  /* Text/foreground (dark) */
-  --sl-color-black: #1c1812;
+  /* Backgrounds (light, used as Starlight's "black") */
+  --sl-color-black: #ede2c8;
   --sl-color-bg-nav: #e5d8b9;
   --sl-color-bg-sidebar: #ede2c8;
 

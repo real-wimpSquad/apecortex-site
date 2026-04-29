@@ -3,12 +3,13 @@ import GlyphField from '../components/GlyphField.astro';
 import GlyphCard from '../components/GlyphCard.astro';
 import '../styles/tokens.css';
 import '../styles/starlight-theme.css';
+const base = import.meta.env.BASE_URL;
 ---
 
 <html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
 
     <!-- Theme synchronization script (matches Starlight behavior) -->
     <script is:inline>
@@ -57,12 +58,12 @@ import '../styles/starlight-theme.css';
     <GlyphField />
 
     <header class="topnav">
-      <a class="brand" href="/">
+      <a class="brand" href={base}>
         <span class="brand-mark" aria-hidden="true">→</span>
         <span class="brand-name">APE</span>
       </a>
       <nav>
-        <a href="/intro">Docs</a>
+        <a href={`${base}/intro`}>Docs</a>
         <a href="https://github.com/real-wimpSquad/ape" rel="noopener">GitHub</a>
       </nav>
     </header>
@@ -82,7 +83,7 @@ import '../styles/starlight-theme.css';
           the session, the model, and the vendor. Yours.
         </p>
         <div class="cta-row">
-          <a class="cta primary" href="/intro">Read the docs →</a>
+          <a class="cta primary" href={`${base}/intro`}>Read the docs →</a>
           <a class="cta ghost" href="https://github.com/real-wimpSquad/ape" rel="noopener">
             Source on GitHub
           </a>
@@ -107,7 +108,7 @@ import '../styles/starlight-theme.css';
         <p class="aside">
           <em>
             There is, of course, the matter of the name —
-            <a href="/origin">a longer story</a>.
+            <a href={`${base}/origin`}>a longer story</a>.
           </em>
         </p>
       </section>
@@ -275,9 +276,9 @@ weather_holds⇒rail_daytrip→Sintra@mid_week`}
         <div class="footer-col">
           <p class="footer-head">Documentation</p>
           <ul>
-            <li><a href="/intro">What is APE?</a></li>
-            <li><a href="/glyph-primer">Glyph primer</a></li>
-            <li><a href="/runtime/architecture">Runtime architecture</a></li>
+            <li><a href={`${base}/intro`}>What is APE?</a></li>
+            <li><a href={`${base}/glyph-primer`}>Glyph primer</a></li>
+            <li><a href={`${base}/runtime/architecture`}>Runtime architecture</a></li>
           </ul>
         </div>
 
@@ -293,7 +294,7 @@ weather_holds⇒rail_daytrip→Sintra@mid_week`}
         <div class="footer-col">
           <p class="footer-head">Apocrypha</p>
           <ul>
-            <li><a href="/origin">Origin</a></li>
+            <li><a href={`${base}/origin`}>Origin</a></li>
           </ul>
         </div>
       </div>

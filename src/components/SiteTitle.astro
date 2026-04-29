@@ -1,9 +1,10 @@
 ---
 // Custom Starlight site title: keeps the home link back to the landing page
 // rather than staying inside the docs tree.
+const base = import.meta.env.BASE_URL;
 ---
 
-<a href="/" class="site-title">
+<a href={base} class="site-title">
   <span class="mark" aria-hidden="true">→</span>
   <span class="name">APE</span>
   <span class="sub">docs</span>
