@@ -1,29 +1,20 @@
 ---
 import GlyphField from '../components/GlyphField.astro';
 import GlyphCard from '../components/GlyphCard.astro';
+import { ThemeScript } from '@astrojs/starlight/components';
 import '../styles/tokens.css';
 import '../styles/starlight-theme.css';
 const base = import.meta.env.BASE_URL;
 ---
 
-<html lang="en" data-theme="dark">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
 
-    <!-- Theme synchronization script (matches Starlight behavior) -->
-    <script is:inline>
-      (() => {
-        const html = document.documentElement;
-        const stored = localStorage.getItem('starlight-theme') ||
-          (document.cookie.match(/starlight-theme=([^;]+)/) || [])[1];
-        if (stored) {
-          html.setAttribute('data-theme', stored);
-        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-          html.setAttribute('data-theme', 'light');
-        }
-      })();
-    </script>
+    <!-- Theme synchronization (provided by Starlight) -->
+    <ThemeScript />
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>APE — Agent Persistence Exocortex</title>
@@ -616,8 +607,10 @@ weather_holds⇒rail_daytrip→Sintra@mid_week`}
         border-radius: 3px;
         font-size: 0.95em;
       }
-      :root[data-theme='light'] .translation-blurb code {
-        background: rgba(154, 77, 12, 0.08);
+      @media (prefers-color-scheme: light) {
+        .translation-blurb code {
+          background: rgba(154, 77, 12, 0.08);
+        }
       }
       .translation-more {
         font-family: var(--ape-font-display);
