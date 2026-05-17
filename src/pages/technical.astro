@@ -1,0 +1,699 @@
+---
+import GlyphField from '../components/GlyphField.astro';
+import GlyphCard from '../components/GlyphCard.astro';
+import '../styles/tokens.css';
+import '../styles/starlight-theme.css';
+import '../styles/page-layout.css';
+const base = import.meta.env.BASE_URL;
+---
+
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+
+    <script is:inline>
+      (() => {
+        const html = document.documentElement;
+        const stored = localStorage.getItem('starlight-theme') ||
+          (document.cookie.match(/starlight-theme=([^;]+)/) || [])[1];
+        if (stored) {
+          html.setAttribute('data-theme', stored);
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          html.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>APE — Technical overview · glyph, graph, and the runtime</title>
+    <meta
+      name="description"
+      content="How APE works under the hood — the glyph translation language, the hybrid vector + graph store, the self-teaching apeifier, and the runtime that ships in a single Rust binary."
+    />
+    <meta name="keywords" content="APE technical, glyph notation, vector graph memory, MCP server, self-hosted memory architecture, AI memory graph, Rust memory runtime" />
+    <meta property="og:title" content="APE — Technical overview" />
+    <meta property="og:description" content="The glyph translation language, the hybrid vector + graph store, and the runtime." />
+    <meta property="og:type" content="article" />
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap"
+    />
+  </head>
+
+  <body>
+    <GlyphField />
+
+    <header class="topnav">
+      <a class="brand" href={base}>
+        <span class="brand-mark" aria-hidden="true">→</span>
+        <span class="brand-name">APE</span>
+      </a>
+      <nav>
+        <a href={base}>Home</a>
+        <a href={`${base}/intro`}>Docs</a>
+        <a href="https://github.com/real-wimpSquad/ape" rel="noopener">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ─────────────────────────  HERO  ───────────────────────── -->
+      <section class="tech-hero">
+        <p class="tech-eyebrow">Technical overview</p>
+        <h1 class="tech-title">
+          The shape under<br />
+          the <span class="accent">memory.</span>
+        </h1>
+        <p class="tech-sub">
+          The landing page promised a memory layer that sits beside your agents.
+          This page is where the abstraction opens up — the translation
+          language, the storage shape, and the runtime that holds it together.
+          If you came for the gritty version, you're in the right place.
+        </p>
+      </section>
+
+      <!-- ─────────────────────────  §I  THE SHAPE  ───────────────────────── -->
+      <section class="essay" data-reveal style="--i:0">
+        <p class="section-eyebrow">
+          <span class="numeral">I.</span><span class="rule"></span><span class="label">The shape</span>
+        </p>
+        <p class="lede">
+          <span class="dropcap">A</span>PE is the
+          <strong>Agent Persistence Exocortex</strong> — a memory layer that sits
+          beside your agents and remembers for them. It watches what passes
+          through — conversations, decisions, discoveries — and translates the
+          record into a dense operator notation called
+          <em>glyph</em>. The result lives in a graph, not a flat log. The next
+          time an agent needs context, it asks the graph. Your agents stop
+          starting from scratch.
+        </p>
+        <p class="aside">
+          <em>
+            There is, of course, the matter of the name —
+            <a href={`${base}/origin`}>a longer story</a>.
+          </em>
+        </p>
+      </section>
+
+      <!-- ─────────────────────────  §II  THE TRANSLATION  ───────────────────────── -->
+      <section class="translation">
+        <p class="section-eyebrow">
+          <span class="numeral">II.</span><span class="rule"></span><span class="label">The translation</span>
+        </p>
+
+        <div class="big-translation" data-reveal style="--i:0">
+          <div class="big-side big-prose">
+            <p class="side-tag">prose in</p>
+            <p class="side-text">
+              On Tuesday's standup, Priya flagged the auth bug — it's a P0 that
+              blocks launch, and unblocking it needs both security sign-off and a
+              QA rerun. Hotfix by Friday; rollback if it slips.
+            </p>
+          </div>
+
+          <div class="big-divider" aria-hidden="true">
+            <span class="big-arrow">→</span>
+          </div>
+
+          <div class="big-side big-glyph">
+            <p class="side-tag">glyph</p>
+            <code class="side-text mono">{`(day:Tue_standup)Priya⪽auth_bug{priority:P0}⊣launch
+[security_signoff∧QA_rerun]⇒auth_bug⊖
+hotfix{deadline:Friday}|hotfix∌deadline⇒rollback`}</code>
+          </div>
+        </div>
+
+        <p class="translation-blurb">
+          One rule: <strong>nouns are nucleoids, everything else is an
+          operator.</strong> Entities sit on the page; the relations between
+          them are symbols — <code>→</code> causes, <code>⊣</code> blocks,
+          <code>∧</code> joint requirement, <code>∈</code> belongs to,
+          <code>≡</code> equivalent, <code>⊕</code> create, <code>⊖</code>
+          destroy. The alphabet is closed; when a source claim falls outside
+          it, the translator surfaces the gap as <code>MISSING</code> rather
+          than coining its way around it. Every fact survives; only the
+          representation changes.
+        </p>
+
+        <p class="translation-more">— And in other shapes:</p>
+
+        <div class="cards">
+          <GlyphCard
+            eyebrow="Sales debrief"
+            prose="Acme deal — Priya in Eng is the decision-maker, budget approved through Q3. SOC2 timing is their open objection. Aim to close by end of quarter; if SOC2 slips past mid-quarter, escalate to legal."
+            glyph={`Acme_deal⪽Priya(Eng){role:decision_maker}
+budget{horizon:Q3}=approved
+SOC2_timing∈open_objection
+close_by:Q_end|SOC2∌mid_quarter⇒escalate→legal`}
+            back="Acme deal — Priya (Eng) is decision-maker, budget approved through Q3; SOC2 timing is the open objection; close by quarter-end, escalate to legal if SOC2 slips past mid-quarter."
+          />
+          <GlyphCard
+            eyebrow="Support ticket"
+            prose="Customer is on the Enterprise tier, deployed self-hosted in eu-west-1, integrated with Salesforce. Auth tokens expire prematurely after the v3.2 upgrade. Workaround is to bump session TTL until v3.3 ships."
+            glyph={`customer{tier:Enterprise|deploy:self_hosted_eu_west_1|integration:Salesforce}
+v3.2_upgrade→auth_tokens⊣premature_expiry
+workaround:session_TTL↑|until:v3.3`}
+            back="Enterprise customer, self-hosted eu-west-1, Salesforce integration; v3.2 upgrade causes premature auth-token expiry; raise session TTL until v3.3 ships."
+          />
+          <GlyphCard
+            eyebrow="Internal planning"
+            prose="Q2 priorities: ship the audit-log feature, defer the SSO rewrite to Q3, hire a second SRE. If audit-log slips, drop the dashboard refresh first — SSO stays out."
+            glyph={`Q2{ship:audit_log|defer:SSO_rewrite→Q3|hire:SRE×2}
+audit_log∌Q2⇒dashboard_refresh⊖
+SSO∌Q2(invariant)`}
+            back="Q2 — ship audit-log, defer SSO to Q3, hire a second SRE; if audit-log slips, drop dashboard refresh first; SSO stays deferred regardless."
+          />
+        </div>
+      </section>
+
+      <!-- ─────────────────────────  §III  WHY IT MATTERS  ───────────────────────── -->
+      <section class="why">
+        <p class="section-eyebrow">
+          <span class="numeral">III.</span><span class="rule"></span><span class="label">Why this shape</span>
+        </p>
+        <ol class="statements">
+          <li class="statement" data-reveal style="--i:0">
+            <span class="marker">01</span>
+            <p>
+              <span class="key">Dense.</span>
+              <em>Glyph is a fraction the size of prose. Your context window goes further.</em>
+            </p>
+          </li>
+          <li class="statement" data-reveal style="--i:1">
+            <span class="marker">02</span>
+            <p>
+              <span class="key">Durable.</span>
+              <em>Memories outlive the session, the model, the vendor.</em>
+            </p>
+          </li>
+          <li class="statement" data-reveal style="--i:2">
+            <span class="marker">03</span>
+            <p>
+              <span class="key">Queryable.</span>
+              <em>Hybrid vector + graph retrieval. Semantic search expands through the graph in one pass — no fuzzy-search roulette.</em>
+            </p>
+          </li>
+          <li class="statement" data-reveal style="--i:3">
+            <span class="marker">04</span>
+            <p>
+              <span class="key">Yours.</span>
+              <em>Runs on your own hardware. Your data stays on your machine — and doesn't train anyone else's model.</em>
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ─────────────────────────  §IV  HOW IT SHIPS  ───────────────────────── -->
+      <section class="ship">
+        <p class="section-eyebrow">
+          <span class="numeral">IV.</span><span class="rule"></span><span class="label">How it ships</span>
+        </p>
+
+        <h2 class="terminal-head">
+          <span class="prompt">$</span><span class="sp"> </span><span class="cmd">ape ship</span><span class="sp"> </span><span class="flag">--list</span><span class="caret">_</span>
+        </h2>
+
+        <dl class="manifest">
+          <div class="row" data-reveal style="--i:0">
+            <dt>--airgap-or-api</dt>
+            <dd>run fully airgapped locally, or plug in <span class="value">Claude</span>, <span class="value">ChatGPT</span>, or <span class="value">Grok</span></dd>
+          </div>
+          <div class="row" data-reveal style="--i:1">
+            <dt>--no-build</dt>
+            <dd>prebuilt images — you never touch a compiler</dd>
+          </div>
+          <div class="row" data-reveal style="--i:2">
+            <dt>--install-time</dt>
+            <dd><span class="value">≈ 60s</span> — one command and you are functional. Full GUI config for Enterprise needs</dd>
+          </div>
+          <div class="row" data-reveal style="--i:3">
+            <dt>--subscriptions</dt>
+            <dd><span class="value">none</span> — install it, keep it. nobody bills you monthly for your own memories</dd>
+          </div>
+          <div class="row" data-reveal style="--i:4">
+            <dt>--mcp-native</dt>
+            <dd>Claude Code, ChatGPT, LM Studio. Any MCP-capable client</dd>
+          </div>
+          <div class="row" data-reveal style="--i:5">
+            <dt>--vendor-agnostic</dt>
+            <dd>swap providers and model families without migrating memories. the cortex outlives the model</dd>
+          </div>
+          <div class="row" data-reveal style="--i:6">
+            <dt>--ops-surface</dt>
+            <dd>one service, one store, no sidecars</dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- ─────────────────────────  §V  WHAT'S IN THE BOX  ───────────────────────── -->
+      <section class="box">
+        <p class="section-eyebrow">
+          <span class="numeral">V.</span><span class="rule"></span><span class="label">What's in the box</span>
+        </p>
+
+        <dl class="parts">
+          <div class="part">
+            <dt>ape</dt>
+            <dd>A single Rust binary. Carries the gateway (auth, settings, LLM proxy), the MCP server, semantic search, the knowledge graph, and the L1→L2→L3 self-teaching <em>apeifier</em> that translates prose into glyph.</dd>
+          </div>
+          <div class="part">
+            <dt>Qdrant</dt>
+            <dd>The vector index. One collection per concept-space; dimension is set at space creation and is immutable thereafter.</dd>
+          </div>
+          <div class="part">
+            <dt>Redis</dt>
+            <dd>Per-session context stash and short-lived cache. Nothing durable lives here.</dd>
+          </div>
+          <div class="part">
+            <dt>SQLite</dt>
+            <dd>The durable store — graph nodes and edges, corpus records, auth, and all configuration. Lives on the <code>ape_data</code> volume as a single file you can <code>cp</code> for backups.</dd>
+          </div>
+        </dl>
+
+        <p class="box-aside">
+          <em>
+            APE binds to <code>127.0.0.1:8070</code>. Point any ingress at it,
+            or run <code>make caddy</code> for bundled TLS. MCP clients connect
+            at <code>/mcp</code>.
+          </em>
+        </p>
+      </section>
+    </main>
+
+    <!-- ─────────────────────────  FOOTER  ───────────────────────── -->
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <p class="footer-mark"><span class="mark-arrow">→</span> APE</p>
+          <p class="footer-tagline">Agent Persistence Exocortex.</p>
+          <p class="footer-stack">Rust · SQLite · Qdrant · MCP</p>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-head">This page</p>
+          <ul>
+            <li><a href="#shape">The shape</a></li>
+            <li><a href="#translation">The translation</a></li>
+            <li><a href="#ship">How it ships</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-head">Documentation</p>
+          <ul>
+            <li><a href={base}>Landing</a></li>
+            <li><a href={`${base}/intro`}>What is APE?</a></li>
+            <li><a href={`${base}/glyph-primer`}>Glyph primer</a></li>
+            <li><a href={`${base}/runtime/architecture`}>Runtime architecture</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-head">Source</p>
+          <ul>
+            <li><a href="https://github.com/real-wimpSquad/ape" rel="noopener">GitHub</a></li>
+            <li><a href="https://github.com/real-wimpSquad/ape/issues" rel="noopener">Issues</a></li>
+            <li><a href="https://github.com/real-wimpSquad/ape/blob/main/LICENSE" rel="noopener">License</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-rule"></div>
+      <p class="footer-copy">
+        APE — a self-hosted exocortex.
+        Memory, dressed for the occasion.
+      </p>
+    </footer>
+
+    <style>
+      /* ────────────────  Tech hero  ──────────────── */
+
+      .tech-hero { padding: 4.5rem 0 6.5rem; max-width: 50rem; }
+      .tech-eyebrow {
+        font-family: var(--ape-font-mono);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--ape-amber-dim);
+        margin: 0 0 2.25rem;
+      }
+      .tech-title {
+        font-family: var(--ape-font-display);
+        font-weight: 400;
+        font-size: clamp(3rem, 7.5vw, 5.5rem);
+        line-height: 0.98;
+        letter-spacing: -0.018em;
+        margin: 0 0 2.25rem;
+        color: var(--ape-text);
+      }
+      .tech-title .accent { color: var(--ape-amber); font-style: italic; }
+      .tech-sub {
+        font-family: var(--ape-font-prose);
+        font-size: 1.15rem;
+        line-height: 1.6;
+        color: var(--ape-text-muted);
+        max-width: 40rem;
+        margin: 0;
+      }
+
+      /* ────────────────  §I — The shape (editorial lede + drop cap)  ──────────────── */
+
+      .essay { max-width: 44rem; }
+      .lede {
+        font-family: var(--ape-font-display);
+        font-weight: 400;
+        font-size: clamp(1.4rem, 2.1vw, 1.75rem);
+        line-height: 1.45;
+        letter-spacing: -0.005em;
+        color: var(--ape-text);
+        margin: 0 0 2rem;
+      }
+      .lede strong { font-weight: 400; color: var(--ape-amber); }
+      .lede em { font-style: italic; color: var(--ape-text); }
+      .dropcap {
+        float: left;
+        font-family: var(--ape-font-display);
+        font-style: normal;
+        font-size: 4.6em;
+        line-height: 0.85;
+        padding: 0.08em 0.12em 0 0;
+        margin: 0.05em 0.05em 0 0;
+        color: var(--ape-amber);
+      }
+      .aside {
+        margin: 2.25rem 0 0;
+        font-family: var(--ape-font-display);
+        font-style: italic;
+        font-size: 1.05rem;
+        line-height: 1.55;
+        color: var(--ape-text-muted);
+      }
+      .aside a {
+        color: var(--ape-text-muted);
+        border-bottom: 1px solid var(--ape-border-strong);
+        transition: color 0.18s ease, border-color 0.18s ease;
+      }
+      .aside a:hover { color: var(--ape-amber); border-bottom-color: var(--ape-amber); }
+
+      /* ────────────────  §II — Translation  ──────────────── */
+
+      .big-translation {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        align-items: stretch;
+        margin: 0 0 4rem;
+        padding: 2.25rem 0 2.5rem;
+        border-top: 1px solid var(--ape-border);
+        border-bottom: 1px solid var(--ape-border);
+      }
+      @media (min-width: 860px) {
+        .big-translation {
+          grid-template-columns: 1fr auto 1fr;
+          gap: 2.5rem;
+        }
+      }
+      .big-side { display: flex; flex-direction: column; gap: 0.85rem; }
+      .side-tag {
+        font-family: var(--ape-font-mono);
+        font-size: 0.66rem;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        color: var(--ape-text-faint);
+        margin: 0;
+      }
+      .big-prose .side-text {
+        font-family: var(--ape-font-display);
+        font-size: clamp(1.25rem, 1.7vw, 1.45rem);
+        line-height: 1.5;
+        color: var(--ape-text);
+        margin: 0;
+      }
+      .big-glyph .side-text.mono {
+        font-family: var(--ape-font-mono);
+        font-weight: 400;
+        font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+        line-height: 1.7;
+        color: var(--ape-amber);
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        display: block;
+      }
+      .big-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--ape-amber-dim);
+      }
+      @media (max-width: 859px) {
+        .big-divider { padding: 0.5rem 0; }
+      }
+      .big-arrow {
+        font-family: var(--ape-font-mono);
+        font-size: 1.6rem;
+        line-height: 1;
+        color: var(--ape-amber);
+        opacity: 0.7;
+      }
+
+      .translation-blurb {
+        max-width: 52rem;
+        font-family: var(--ape-font-prose);
+        font-size: 1rem;
+        line-height: 1.65;
+        color: var(--ape-text-muted);
+        margin: 0 0 3rem;
+      }
+      .translation-blurb code {
+        font-family: var(--ape-font-mono);
+        color: var(--ape-amber);
+        background: rgba(212, 161, 74, 0.08);
+        padding: 0.05em 0.3em;
+        border-radius: 3px;
+        font-size: 0.95em;
+      }
+      :root[data-theme='light'] .translation-blurb code {
+        background: rgba(154, 77, 12, 0.08);
+      }
+      .translation-more {
+        font-family: var(--ape-font-display);
+        font-style: italic;
+        font-size: 1.05rem;
+        color: var(--ape-text-muted);
+        margin: 0 0 1.75rem;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      @media (min-width: 900px) {
+        .cards { grid-template-columns: repeat(3, 1fr); }
+      }
+
+      /* ────────────────  §III — Why this shape  ──────────────── */
+
+      .why { max-width: 46rem; }
+      .statements {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2.25rem;
+      }
+      .statement {
+        display: grid;
+        grid-template-columns: 2.5rem 1fr;
+        gap: 1.4rem;
+        align-items: baseline;
+      }
+      .statement .marker {
+        font-family: var(--ape-font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.18em;
+        color: var(--ape-amber-dim);
+        padding-top: 0.5rem;
+      }
+      .statement p {
+        margin: 0;
+        font-family: var(--ape-font-display);
+        font-weight: 400;
+        font-size: clamp(1.4rem, 2.1vw, 1.85rem);
+        line-height: 1.32;
+        letter-spacing: -0.005em;
+        color: var(--ape-text);
+      }
+      .statement .key {
+        font-style: normal;
+        color: var(--ape-amber);
+        margin-right: 0.35rem;
+      }
+      .statement em { font-style: italic; }
+
+      /* ────────────────  §IV — Ship manifest  ──────────────── */
+
+      .terminal-head {
+        font-family: var(--ape-font-mono);
+        font-weight: 400;
+        font-size: 0.95rem;
+        letter-spacing: 0.01em;
+        color: var(--ape-text);
+        margin: 0 0 2.5rem;
+        display: inline-flex;
+        align-items: baseline;
+      }
+      .terminal-head .prompt { color: var(--ape-amber); }
+      .terminal-head .sp { white-space: pre; }
+      .terminal-head .cmd { color: var(--ape-text); }
+      .terminal-head .flag { color: var(--ape-amber); }
+      .terminal-head .caret {
+        color: var(--ape-amber);
+        margin-left: 0.25ch;
+        animation: ape-blink 1.1s step-end infinite;
+      }
+      @keyframes ape-blink {
+        0%, 50%  { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+
+      .manifest {
+        margin: 0;
+        padding: 0.5rem 0 0.5rem 1.5rem;
+        border-left: 1px solid var(--ape-border);
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+      }
+      .manifest .row {
+        display: grid;
+        grid-template-columns: 20ch 1fr;
+        column-gap: 1.75rem;
+        align-items: baseline;
+        font-family: var(--ape-font-mono);
+        font-size: 0.92rem;
+        line-height: 1.6;
+      }
+      .manifest dt {
+        color: var(--ape-amber);
+        font-weight: 400;
+        letter-spacing: 0.01em;
+      }
+      .manifest dd {
+        margin: 0;
+        color: var(--ape-text-muted);
+      }
+      .manifest .value { color: var(--ape-amber-bright); }
+
+      @media (max-width: 720px) {
+        .manifest { padding-left: 1rem; }
+        .manifest .row {
+          grid-template-columns: 1fr;
+          column-gap: 0;
+          row-gap: 0.1rem;
+        }
+        .manifest dt { padding-bottom: 0.1rem; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .terminal-head .caret { animation: none; }
+      }
+
+      /* ────────────────  §V — What's in the box  ──────────────── */
+
+      .box { max-width: 48rem; }
+      .parts {
+        margin: 0 0 2rem;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .part {
+        display: grid;
+        grid-template-columns: 8rem 1fr;
+        gap: 1.5rem;
+        align-items: baseline;
+      }
+      @media (max-width: 720px) {
+        .part { grid-template-columns: 1fr; gap: 0.35rem; }
+      }
+      .part dt {
+        font-family: var(--ape-font-mono);
+        font-size: 0.95rem;
+        color: var(--ape-amber);
+        letter-spacing: 0.01em;
+      }
+      .part dd {
+        margin: 0;
+        font-family: var(--ape-font-prose);
+        font-size: 1rem;
+        line-height: 1.6;
+        color: var(--ape-text-muted);
+      }
+      .part dd em { color: var(--ape-text); font-style: italic; }
+      .part dd code {
+        font-family: var(--ape-font-mono);
+        font-size: 0.9em;
+        color: var(--ape-amber);
+        background: rgba(212, 161, 74, 0.08);
+        padding: 0.05em 0.3em;
+        border-radius: 3px;
+      }
+      :root[data-theme='light'] .part dd code {
+        background: rgba(154, 77, 12, 0.08);
+      }
+      .box-aside {
+        font-family: var(--ape-font-display);
+        font-style: italic;
+        font-size: 1.05rem;
+        line-height: 1.55;
+        color: var(--ape-text-muted);
+        margin: 0;
+      }
+      .box-aside code {
+        font-family: var(--ape-font-mono);
+        font-style: normal;
+        font-size: 0.9em;
+        color: var(--ape-amber);
+        background: rgba(212, 161, 74, 0.08);
+        padding: 0.05em 0.3em;
+        border-radius: 3px;
+      }
+      :root[data-theme='light'] .box-aside code {
+        background: rgba(154, 77, 12, 0.08);
+      }
+    </style>
+
+    <script is:inline>
+      (() => {
+        const items = document.querySelectorAll('[data-reveal]');
+        if (!items.length) return;
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce || !('IntersectionObserver' in window)) {
+          items.forEach(el => el.classList.add('visible'));
+          return;
+        }
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add('visible');
+              io.unobserve(e.target);
+            }
+          }
+        }, { threshold: 0.18, rootMargin: '0px 0px -40px 0px' });
+        items.forEach(el => io.observe(el));
+      })();
+    </script>
+  </body>
+</html>

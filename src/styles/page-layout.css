@@ -1,0 +1,250 @@
+/* Shared layout, nav, footer, and section-eyebrow styles for the landing
+   page (/) and the technical deep-dive (/technical). Anything page-specific
+   stays inline in the respective .astro file. */
+
+html, body {
+  background: var(--ape-bg);
+  color: var(--ape-text);
+  margin: 0;
+  padding: 0;
+  font-family: var(--ape-font-prose);
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+::selection {
+  background: var(--ape-amber);
+  color: var(--ape-bg);
+}
+a { color: var(--ape-amber); text-decoration: none; }
+a:hover { color: var(--ape-amber-bright); }
+
+/* ────────────────  Top nav  ──────────────── */
+
+.topnav {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.75rem clamp(1.25rem, 5vw, 3rem);
+  max-width: 70rem;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  font-family: var(--ape-font-mono);
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--ape-text);
+  letter-spacing: 0.03em;
+}
+.brand-mark { color: var(--ape-amber); font-size: 1.1em; }
+.topnav nav { display: flex; gap: 1.75rem; }
+.topnav nav a {
+  font-family: var(--ape-font-mono);
+  font-size: 0.85rem;
+  color: var(--ape-text-muted);
+  letter-spacing: 0.04em;
+}
+.topnav nav a:hover { color: var(--ape-amber); }
+
+/* ────────────────  Main layout  ──────────────── */
+
+main {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 3rem);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+section {
+  padding: 6.5rem 0;
+  position: relative;
+}
+section + section {
+  border-top: 1px solid var(--ape-border);
+}
+
+/* Section eyebrow — Roman numeral · rule · uppercase label.
+   Used on /technical. Landing page uses a flatter variant defined inline. */
+.section-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 3rem;
+  font-family: var(--ape-font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--ape-amber-dim);
+}
+.section-eyebrow .numeral {
+  font-family: var(--ape-font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ape-amber);
+  line-height: 1;
+  padding-top: 0.05em;
+}
+.section-eyebrow .rule {
+  flex: 0 0 3rem;
+  height: 1px;
+  background: var(--ape-amber-dim);
+  opacity: 0.55;
+}
+.section-eyebrow .label {
+  color: var(--ape-amber-dim);
+}
+
+/* ────────────────  CTAs  ──────────────── */
+
+.cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+.cta {
+  font-family: var(--ape-font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  padding: 0.85rem 1.35rem;
+  border-radius: 4px;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+.cta.primary {
+  background: var(--ape-amber);
+  color: var(--ape-bg);
+  border: 1px solid var(--ape-amber);
+}
+.cta.primary:hover {
+  background: var(--ape-amber-bright);
+  border-color: var(--ape-amber-bright);
+  color: var(--ape-bg);
+}
+.cta.ghost {
+  background: transparent;
+  color: var(--ape-text);
+  border: 1px solid var(--ape-border-strong);
+}
+.cta.ghost:hover {
+  border-color: var(--ape-amber);
+  color: var(--ape-amber);
+}
+
+/* ────────────────  Footer  ──────────────── */
+
+.site-footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--ape-border);
+  margin: 4rem auto 0;
+  padding: 4rem clamp(1.25rem, 5vw, 3rem) 2.5rem;
+  max-width: 70rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+@media (min-width: 760px) {
+  .footer-grid {
+    grid-template-columns: 1.4fr repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+.footer-brand .footer-mark {
+  font-family: var(--ape-font-mono);
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--ape-text);
+  letter-spacing: 0.03em;
+  margin: 0 0 0.75rem;
+}
+.footer-brand .mark-arrow { color: var(--ape-amber); }
+.footer-tagline {
+  font-family: var(--ape-font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--ape-text-muted);
+  margin: 0 0 0.85rem;
+}
+.footer-stack {
+  font-family: var(--ape-font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  color: var(--ape-text-faint);
+  margin: 0;
+}
+.footer-head {
+  font-family: var(--ape-font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ape-amber-dim);
+  margin: 0 0 1rem;
+}
+.footer-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.footer-col a {
+  font-family: var(--ape-font-prose);
+  font-size: 0.92rem;
+  color: var(--ape-text-muted);
+  transition: color 0.18s ease;
+}
+.footer-col a:hover { color: var(--ape-amber); }
+
+.footer-rule {
+  height: 1px;
+  background: var(--ape-border);
+  margin: 3rem 0 1.5rem;
+}
+.footer-copy {
+  font-family: var(--ape-font-display);
+  font-style: italic;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--ape-text-faint);
+  margin: 0;
+}
+
+/* ────────────────  Reveal animation baseline  ──────────────── */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 700ms cubic-bezier(.2,.8,.2,1),
+    transform 700ms cubic-bezier(.2,.8,.2,1);
+  transition-delay: calc(var(--i, 0) * 95ms);
+}
+[data-reveal].visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

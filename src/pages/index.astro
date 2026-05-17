@@ -1,31 +1,28 @@
 ---
 import GlyphField from '../components/GlyphField.astro';
-import GlyphCard from '../components/GlyphCard.astro';
-import { ThemeScript } from '@astrojs/starlight/components';
 import '../styles/tokens.css';
 import '../styles/starlight-theme.css';
+import '../styles/page-layout.css';
 const base = import.meta.env.BASE_URL;
 ---
 
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
 
-    <!-- Theme synchronization (provided by Starlight) -->
-    <ThemeScript />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>APE — Agent Persistence Exocortex</title>
+    <title>APE — Self-hosted AI memory you actually own</title>
     <meta
       name="description"
-      content="A persistent, compressed memory layer for AI agents — across sessions, models, and vendors. Self-hosted. Translation-based. Yours."
+      content="APE is a self-hosted, air-gappable AI memory layer that runs on your own hardware. Your assistant remembers your work across sessions, models, and vendors — Claude, ChatGPT, any AI tool that supports MCP. Context warming pulls the right memories into the prompt before the AI sees it. No subscription."
     />
-    <meta property="og:title" content="APE — Agent Persistence Exocortex" />
+    <meta name="keywords" content="AI memory, persistent AI memory, self-hosted AI memory, local AI memory, private AI memory, air-gapped AI, vendor-neutral AI memory, MCP memory server, Claude memory, ChatGPT memory, context warming" />
+    <meta property="og:title" content="APE — Self-hosted AI memory you actually own" />
     <meta
       property="og:description"
-      content="A persistent, compressed memory layer for AI agents — across sessions, models, and vendors."
+      content="Persistent, air-gappable AI memory across Claude, ChatGPT, and any MCP client. Install it on your own machine. No subscription."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://apecortex.com" />
@@ -54,6 +51,7 @@ const base = import.meta.env.BASE_URL;
         <span class="brand-name">APE</span>
       </a>
       <nav>
+        <a href={`${base}/technical`}>Technical</a>
         <a href={`${base}/intro`}>Docs</a>
         <a href="https://github.com/real-wimpSquad/ape" rel="noopener">GitHub</a>
       </nav>
@@ -62,196 +60,377 @@ const base = import.meta.env.BASE_URL;
     <main>
       <!-- ─────────────────────────  HERO  ───────────────────────── -->
       <section class="hero">
-        <p class="hero-eyebrow">Agent · Persistence · Exocortex</p>
+        <p class="hero-eyebrow">Self-hosted · Air-gappable · Vendor-neutral</p>
         <h1 class="hero-title">
-          A cortex<br />
-          for the<br />
-          <span class="accent">stateless.</span>
+          Your AI forgets you<br />
+          every session.<br />
+          <span class="accent">APE remembers.</span>
         </h1>
         <p class="hero-sub">
-          Stateless agents forget. APE remembers — a self-hosted layer that
-          translates what passes through, stores it as a graph, and outlives
-          the session, the model, and the vendor. Yours.
+          Install APE on your own hardware. It pulls the right context into
+          every prompt — automatically — and remembers across sessions, models,
+          and vendors. Works with Claude, ChatGPT, and any AI tool that supports
+          MCP. No cloud account. No subscription. Air-gap it if you want.
         </p>
         <div class="cta-row">
+          <a class="cta primary" href="#install">Install in 60s →</a>
+          <a class="cta ghost" href="#how">How it works</a>
+          <a class="cta ghost" href="https://github.com/real-wimpSquad/ape" rel="noopener">
+            GitHub
+          </a>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────  THE PROBLEM  ───────────────────────── -->
+      <section class="problem" id="problem">
+        <p class="block-eyebrow">The problem</p>
+        <h2 class="block-head">AI assistants are powerful — and amnesiac.</h2>
+        <ul class="pain-list">
+          <li class="pain" data-reveal style="--i:0">
+            <span class="pain-mark">01</span>
+            <div>
+              <h3>It forgets.</h3>
+              <p>Every new chat starts from zero. You re-explain your team, your stack, your account, your last conversation. Every. Single. Time.</p>
+            </div>
+          </li>
+          <li class="pain" data-reveal style="--i:1">
+            <span class="pain-mark">02</span>
+            <div>
+              <h3>It isn't yours.</h3>
+              <p>The "memory" features baked into Claude and ChatGPT live on their servers, in their account, under their rules. Your context is their asset.</p>
+            </div>
+          </li>
+          <li class="pain" data-reveal style="--i:2">
+            <span class="pain-mark">03</span>
+            <div>
+              <h3>It's locked in.</h3>
+              <p>Switch from Claude to ChatGPT — or move your team to a new model next year — and everything your AI learned about you stays behind.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ─────────────────────────  WHAT APE DOES  ───────────────────────── -->
+      <section class="solution">
+        <p class="block-eyebrow">The fix</p>
+        <h2 class="block-head">A memory layer that lives on <em>your</em> hardware.</h2>
+        <p class="block-lede">
+          APE sits between you and your AI tools. Conversations flow through it,
+          the important parts get stored on your hardware, and the relevant
+          slice gets pulled back into context before the next prompt is sent.
+          No re-explaining. No cloud. No subscription.
+        </p>
+
+        <div class="benefit-grid">
+          <div class="benefit" data-reveal style="--i:0">
+            <p class="benefit-tag">Persistent</p>
+            <h3>Remembers across sessions, models, and vendors.</h3>
+            <p>Pick up where you left off — even after switching from Claude to ChatGPT or upgrading to next year's model. Your memory outlives any single tool.</p>
+          </div>
+          <div class="benefit" data-reveal style="--i:1">
+            <p class="benefit-tag">Yours</p>
+            <h3>Lives on your hardware. Air-gap it if you want.</h3>
+            <p>Memory never leaves your hardware. Run it fully offline for legal, compliance, or peace-of-mind. Your data doesn't train anyone else's model.</p>
+          </div>
+          <div class="benefit" data-reveal style="--i:2">
+            <p class="benefit-tag">Context warming</p>
+            <h3>Pulls the right context before the AI sees the prompt.</h3>
+            <p>Before each request leaves your machine, APE attaches the memories that matter for what you're asking. No prompt-engineering, no "remember this."</p>
+          </div>
+          <div class="benefit" data-reveal style="--i:3">
+            <p class="benefit-tag">Yours to keep</p>
+            <h3>One install. No subscription. No vendor.</h3>
+            <p>You host it, you own it. Nobody bills you monthly for access to your own memory. Updates are opt-in, backups are local, and your data is a single file you can copy.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────  SEE IT  ───────────────────────── -->
+      <section class="see">
+        <p class="block-eyebrow">See it</p>
+        <h2 class="block-head">Three places it earns its keep.</h2>
+
+        <div class="scenarios">
+          <article class="scenario" data-reveal style="--i:0">
+            <p class="scenario-tag">Sales</p>
+            <p class="scenario-title">The Acme account, three weeks later.</p>
+            <div class="scenario-said">
+              <p class="said-when">Tuesday standup</p>
+              <p class="said-body">"Acme deal — Priya in Eng is the decision-maker. Budget approved through Q3. SOC2 timing is their open objection."</p>
+            </div>
+            <div class="scenario-row">
+              <p class="row-tag">Without APE</p>
+              <p class="row-body">"Can you remind me where we are with Acme?"</p>
+            </div>
+            <div class="scenario-row good">
+              <p class="row-tag">With APE</p>
+              <p class="row-body">"You're calling Priya, the Eng decision-maker. Budget's approved through Q3 — she's still waiting on your SOC2 timeline."</p>
+            </div>
+          </article>
+
+          <article class="scenario" data-reveal style="--i:1">
+            <p class="scenario-tag">Support</p>
+            <p class="scenario-title">The customer who keeps coming back.</p>
+            <div class="scenario-said">
+              <p class="said-when">Last week's ticket</p>
+              <p class="said-body">"We're on the Enterprise tier, deployed self-hosted in eu-west-1, integrated with Salesforce."</p>
+            </div>
+            <div class="scenario-row">
+              <p class="row-tag">Without APE</p>
+              <p class="row-body">"Tell me your setup again."</p>
+            </div>
+            <div class="scenario-row good">
+              <p class="row-tag">With APE</p>
+              <p class="row-body">"Enterprise · self-hosted eu-west-1 · Salesforce. What's broken today?"</p>
+            </div>
+          </article>
+
+          <article class="scenario" data-reveal style="--i:2">
+            <p class="scenario-tag">Internal</p>
+            <p class="scenario-title">What did we decide, again?</p>
+            <div class="scenario-said">
+              <p class="said-when">Q2 planning meeting</p>
+              <p class="said-body">"Ship audit-log this quarter. Defer the SSO rewrite. Greenlit a second SRE hire."</p>
+            </div>
+            <div class="scenario-row">
+              <p class="row-tag">Without APE</p>
+              <p class="row-body">"What did we decide about SSO?"</p>
+            </div>
+            <div class="scenario-row good">
+              <p class="row-tag">With APE</p>
+              <p class="row-body">"From Q2 planning: SSO rewrite deferred, audit-log prioritized, SRE hire approved."</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────  HOW IT WORKS  ───────────────────────── -->
+      <section class="how" id="how">
+        <p class="block-eyebrow">How it works</p>
+        <h2 class="block-head">Three moving parts. Nothing leaves your hardware.</h2>
+
+        <ol class="steps">
+          <li class="step" data-reveal style="--i:0">
+            <span class="step-num">01</span>
+            <div>
+              <h3>APE listens.</h3>
+              <p>It sits between your AI tool and the model. Every conversation passes through it on the way in and on the way out.</p>
+            </div>
+          </li>
+          <li class="step" data-reveal style="--i:1">
+            <span class="step-num">02</span>
+            <div>
+              <h3>APE compresses.</h3>
+              <p>Each exchange gets translated into a compact memory stored on your hardware — facts, decisions, relationships, and who said what.</p>
+            </div>
+          </li>
+          <li class="step" data-reveal style="--i:2">
+            <span class="step-num">03</span>
+            <div>
+              <h3>APE warms the next prompt.</h3>
+              <p>When you start a new conversation, APE pulls the relevant slice of your memory and attaches it to the prompt — before the AI sees a thing.</p>
+            </div>
+          </li>
+        </ol>
+
+        <p class="how-handoff">
+          Want the gritty version — the translation language, the graph schema,
+          the architecture? <a href={`${base}/technical`}>Read the technical page →</a>
+        </p>
+      </section>
+
+      <!-- ─────────────────────────  FAQ  ───────────────────────── -->
+      <section class="faq" id="faq">
+        <p class="block-eyebrow">Frequently asked</p>
+        <h2 class="block-head">Common questions, straight answers.</h2>
+
+        <div class="faq-list">
+          <details class="faq-item" data-reveal style="--i:0">
+            <summary>
+              <span class="faq-q">Everyone claims "persistent memory" now. How is APE different?</span>
+              <span class="faq-toggle" aria-hidden="true">+</span>
+            </summary>
+            <div class="faq-a">
+              <p>
+                The "memory" features built into Claude and ChatGPT live on
+                <em>their</em> servers, tied to <em>their</em> account, governed
+                by <em>their</em> policies — and they only work inside <em>their</em>
+                app. Switch tools and your memory stays behind.
+              </p>
+              <p>
+                APE runs on your hardware. It follows you across Claude,
+                ChatGPT, and any AI tool that supports MCP. And it warms
+                context into the <strong>prompt itself</strong> — so the memory
+                works whether you're using a chat window, a coding tool, or
+                calling the API directly. You can read the source, run it
+                offline, and walk away with your data any time.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" data-reveal style="--i:1">
+            <summary>
+              <span class="faq-q">Why APE at all? Why not just keep notes in markdown files?</span>
+              <span class="faq-toggle" aria-hidden="true">+</span>
+            </summary>
+            <div class="faq-a">
+              <p>
+                A folder of notes can't pull itself into a prompt. You have to
+                remember which file to attach, every time. And when the
+                notes get long, you blow your context window.
+              </p>
+              <p>
+                APE does the attaching for you: it watches the conversation,
+                decides what's worth remembering, compresses it, and serves the
+                <em>right slice</em> back when you need it — without you lifting
+                a finger. Notes are storage. APE is a working memory that
+                knows what's relevant.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" data-reveal style="--i:2">
+            <summary>
+              <span class="faq-q">What is "air-gapped"? My data is regulated — I can't use APIs.</span>
+              <span class="faq-toggle" aria-hidden="true">+</span>
+            </summary>
+            <div class="faq-a">
+              <p>
+                Air-gapped means APE runs with <strong>zero outbound network
+                traffic</strong>. No calls to Claude, ChatGPT, OpenAI, or any
+                other vendor.
+              </p>
+              <p>
+                Point APE at a local model running on your own hardware (LM
+                Studio, Ollama, llama.cpp, vLLM) and everything — storage,
+                retrieval, translation, the conversation itself — happens
+                inside your network. For regulated environments — healthcare,
+                finance, defense, legal — this is the difference between "we
+                can pilot this" and "we can't even start."
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" data-reveal style="--i:3">
+            <summary>
+              <span class="faq-q">Does it work for teams, or just one person?</span>
+              <span class="faq-toggle" aria-hidden="true">+</span>
+            </summary>
+            <div class="faq-a">
+              <p>
+                One installation, many users. Each person has their own login
+                and their own slice of memory. You can also set up dedicated
+                spaces for shared team knowledge — the customer base, your
+                product docs, last quarter's decisions, the runbook.
+              </p>
+              <p>
+                APE is a tool you run <em>for</em> your team — not a
+                multi-tenant cloud service running for everyone else's team at
+                the same time. Your team's memory stays on your team's
+                hardware.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" data-reveal style="--i:4">
+            <summary>
+              <span class="faq-q">What if APE remembers something wrong? Can I see what's stored?</span>
+              <span class="faq-toggle" aria-hidden="true">+</span>
+            </summary>
+            <div class="faq-a">
+              <p>
+                Yes. Every memory APE has stored is visible in the web UI —
+                browse it, search it, edit it, delete it, see who said what
+                and when. You're never trusting a black box.
+              </p>
+              <p>
+                If a memory turns out to be wrong or outdated, you can
+                down-vote it (which de-ranks it during retrieval) or remove it
+                outright. The next time the AI asks the graph, the bad memory
+                is gone.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" data-reveal style="--i:5">
+            <summary>
+              <span class="faq-q">If APE is open source, how does it stay alive?</span>
+              <span class="faq-toggle" aria-hidden="true">+</span>
+            </summary>
+            <div class="faq-a">
+              <p>
+                Apache 2.0 — installing and running APE is <strong>free,
+                forever</strong>, for anyone. The commercial side is support,
+                implementation help, team training, and the long-term
+                engineering work of keeping the project healthy (so the answer
+                to the next question stays "you'll be fine").
+              </p>
+              <p>
+                If you just want to install it and use it, you never have to
+                talk to us.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" data-reveal style="--i:6">
+            <summary>
+              <span class="faq-q">What happens if APE the project goes away?</span>
+              <span class="faq-toggle" aria-hidden="true">+</span>
+            </summary>
+            <div class="faq-a">
+              <p>
+                Your data is on your hardware, in a single file you can copy.
+                The code is open source under Apache 2.0 — fork it, run the
+                version you have today forever, or take it in whatever
+                direction you want.
+              </p>
+              <p>
+                Nothing about APE depends on us being around. That's the
+                point.
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────  INSTALL  ───────────────────────── -->
+      <section class="install" id="install">
+        <p class="block-eyebrow">Install</p>
+        <h2 class="block-head">One clone. One script. Sixty seconds.</h2>
+        <p class="block-lede">
+          Pull the repo, run the setup script, and APE is up. If you're missing
+          anything it needs, the script walks you through installing it. No
+          compiling, no config files to babysit — everything else lives in a
+          web UI after first boot.
+        </p>
+
+        <div class="install-grid">
+          <div class="install-block">
+            <p class="os-tag">macOS · Linux</p>
+            <pre class="install-code"><code>git clone https://github.com/real-wimpSquad/ape
+cd ape
+bash ape.sh</code></pre>
+          </div>
+          <div class="install-block">
+            <p class="os-tag">Windows</p>
+            <pre class="install-code"><code>git clone https://github.com/real-wimpSquad/ape
+cd ape
+ape.bat</code></pre>
+          </div>
+        </div>
+
+        <p class="install-after">
+          Open <code>http://localhost:8070</code>, paste the one-time setup
+          token from the logs, add an API key in the UI, and you're done.
+          Point any MCP-capable client at <code>http://localhost:8070/mcp</code>.
+        </p>
+
+        <div class="cta-row install-ctas">
           <a class="cta primary" href={`${base}/intro`}>Read the docs →</a>
           <a class="cta ghost" href="https://github.com/real-wimpSquad/ape" rel="noopener">
             Source on GitHub
           </a>
         </div>
-      </section>
-
-      <!-- ─────────────────────────  §I  THE SHAPE  ───────────────────────── -->
-      <section class="essay" data-reveal style="--i:0">
-        <p class="section-eyebrow">
-          <span class="numeral">I.</span><span class="rule"></span><span class="label">The shape</span>
-        </p>
-        <p class="lede">
-          <span class="dropcap">A</span>PE is the
-          <strong>Agent Persistence Exocortex</strong> — a memory layer that sits
-          beside your agents and remembers for them. It watches what passes
-          through — conversations, decisions, discoveries — and translates the
-          record into a dense operator notation called
-          <em>glyph</em>. The result lives in a graph, not a flat log. The next
-          time an agent needs context, it asks the graph. Your agents stop
-          starting from scratch.
-        </p>
-        <p class="aside">
-          <em>
-            There is, of course, the matter of the name —
-            <a href={`${base}/origin`}>a longer story</a>.
-          </em>
-        </p>
-      </section>
-
-      <!-- ─────────────────────────  §II  THE TRANSLATION  ───────────────────────── -->
-      <section class="translation">
-        <p class="section-eyebrow">
-          <span class="numeral">II.</span><span class="rule"></span><span class="label">The translation</span>
-        </p>
-
-        <div class="big-translation" data-reveal style="--i:0">
-          <div class="big-side big-prose">
-            <p class="side-tag">prose in</p>
-            <p class="side-text">
-              On Tuesday's standup, Priya flagged the auth bug — it's a P0 that
-              blocks launch, and unblocking it needs both security sign-off and a
-              QA rerun. Hotfix by Friday; rollback if it slips.
-            </p>
-          </div>
-
-          <div class="big-divider" aria-hidden="true">
-            <span class="big-arrow">→</span>
-          </div>
-
-          <div class="big-side big-glyph">
-            <p class="side-tag">glyph</p>
-            <code class="side-text mono">{`(day:Tue_standup)Priya⪽auth_bug{priority:P0}⊣launch
-[security_signoff∧QA_rerun]⇒auth_bug⊖
-hotfix{deadline:Friday}|hotfix∌deadline⇒rollback`}</code>
-          </div>
-        </div>
-
-        <p class="translation-blurb">
-          One rule: <strong>nouns are nucleoids, everything else is an
-          operator.</strong> Entities sit on the page; the relations between
-          them are symbols — <code>→</code> causes, <code>⊣</code> blocks,
-          <code>∧</code> joint requirement, <code>∈</code> belongs to,
-          <code>≡</code> equivalent, <code>⊕</code> create, <code>⊖</code>
-          destroy. The alphabet is closed; when a source claim falls outside
-          it, the translator surfaces the gap as <code>MISSING</code> rather
-          than coining its way around it. Every fact survives; only the
-          representation changes.
-        </p>
-
-        <p class="translation-more">— And in other shapes:</p>
-
-        <div class="cards">
-          <GlyphCard
-            eyebrow="Bug report"
-            prose="The app crashes on startup after the 2.4 update. Affects every iPhone older than the 12. Android and iPad are unaffected. Crash rate jumped from 0.1% to 8% overnight."
-            glyph={`v2.4_update→crash@startup
-crash→[⊚iPhone(pre_12)|∌[Android|iPad]]
-crash_rate{range:0.1%..8%}@overnight`}
-            back="Startup crash after v2.4; affects every pre-12 iPhone; Android and iPad unaffected; crash rate jumped 0.1% → 8% overnight."
-          />
-          <GlyphCard
-            eyebrow="Vet visit"
-            prose="Took Mia (our Shiba) to the vet this morning. Low-grade ear infection — same strain as last spring, nothing serious. Drops twice daily for a week; if symptoms persist, recheck."
-            glyph={`(date:today_AM)Mia(Shiba)@vet
-ear_infection(low_grade){severity:¬serious}≡last_spring_strain
-drops{freq:2x_daily|dur:7d}
-symptoms(persistent)⇒recheck`}
-            back="Vet with Mia (our Shiba), this morning — low-grade ear infection, equivalent to last spring's strain, not serious; drops twice daily for a week; recheck if symptoms persist."
-          />
-          <GlyphCard
-            eyebrow="Travel note"
-            prose="Booked the Lisbon trip for the first week of October. Direct flight outbound, one stop in Madrid coming back. Hotel in Alfama; rail day-trip to Sintra mid-week if the weather holds."
-            glyph={`Lisbon_trip{date:Oct_W1|hotel:Alfama}
-outbound_flight{stops:0}|return_flight{stops:1|via:Madrid}
-weather_holds⇒rail_daytrip→Sintra@mid_week`}
-            back="Lisbon, first week of October — direct out, one stop via Madrid back; staying in Alfama, day-trip by rail to Sintra mid-week if weather holds."
-          />
-        </div>
-      </section>
-
-      <!-- ─────────────────────────  §III  WHY IT MATTERS  ───────────────────────── -->
-      <section class="why">
-        <p class="section-eyebrow">
-          <span class="numeral">III.</span><span class="rule"></span><span class="label">Why it matters</span>
-        </p>
-        <ol class="statements">
-          <li class="statement" data-reveal style="--i:0">
-            <span class="marker">01</span>
-            <p>
-              <span class="key">Dense.</span>
-              <em>Glyph is a fraction the size of prose. Your context window goes further.</em>
-            </p>
-          </li>
-          <li class="statement" data-reveal style="--i:1">
-            <span class="marker">02</span>
-            <p>
-              <span class="key">Durable.</span>
-              <em>Memories outlive the session, the model, the vendor.</em>
-            </p>
-          </li>
-          <li class="statement" data-reveal style="--i:2">
-            <span class="marker">03</span>
-            <p>
-              <span class="key">Queryable.</span>
-              <em>Graph-native retrieval. No fuzzy-search roulette.</em>
-            </p>
-          </li>
-          <li class="statement" data-reveal style="--i:3">
-            <span class="marker">04</span>
-            <p>
-              <span class="key">Yours.</span>
-              <em>Runs on your own hardware. Your data stays on your machine — and doesn't train anyone else's model.</em>
-            </p>
-          </li>
-        </ol>
-      </section>
-
-      <!-- ─────────────────────────  §IV  HOW IT SHIPS  ───────────────────────── -->
-      <section class="ship">
-        <p class="section-eyebrow">
-          <span class="numeral">IV.</span><span class="rule"></span><span class="label">How it ships</span>
-        </p>
-
-        <h2 class="terminal-head">
-          <span class="prompt">$</span><span class="sp"> </span><span class="cmd">ape ship</span><span class="sp"> </span><span class="flag">--list</span><span class="caret">_</span>
-        </h2>
-
-        <dl class="manifest">
-          <div class="row" data-reveal style="--i:0">
-            <dt>--airgap-or-api</dt>
-            <dd>run fully airgapped locally, or plug in <span class="value">Claude</span>, <span class="value">ChatGPT</span>, or <span class="value">Grok</span></dd>
-          </div>
-          <div class="row" data-reveal style="--i:1">
-            <dt>--no-build</dt>
-            <dd>prebuilt images — you never touch a compiler</dd>
-          </div>
-          <div class="row" data-reveal style="--i:2">
-            <dt>--install-time</dt>
-            <dd><span class="value">≈ 60s</span> — one command and you are functional. Full GUI config for Enterprise needs</dd>
-          </div>
-          <div class="row" data-reveal style="--i:3">
-            <dt>--subscriptions</dt>
-            <dd><span class="value">none</span> — install it, keep it. nobody bills you monthly for your own memories</dd>
-          </div>
-          <div class="row" data-reveal style="--i:4">
-            <dt>--mcp-native</dt>
-            <dd>Claude Code, ChatGPT, LM Studio. Any MCP-capable client</dd>
-          </div>
-          <div class="row" data-reveal style="--i:5">
-            <dt>--vendor-agnostic</dt>
-            <dd>swap providers and model families without migrating memories. the cortex outlives the model</dd>
-          </div>
-          <div class="row" data-reveal style="--i:6">
-            <dt>--ops-surface</dt>
-            <dd>one service, one store, no sidecars</dd>
-          </div>
-        </dl>
       </section>
     </main>
 
@@ -261,12 +440,23 @@ weather_holds⇒rail_daytrip→Sintra@mid_week`}
         <div class="footer-col footer-brand">
           <p class="footer-mark"><span class="mark-arrow">→</span> APE</p>
           <p class="footer-tagline">Agent Persistence Exocortex.</p>
-          <p class="footer-stack">Rust · SQLite · Qdrant · MCP</p>
+          <p class="footer-stack">Self-hosted · Air-gappable · Vendor-neutral</p>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-head">The page</p>
+          <ul>
+            <li><a href="#problem">The problem</a></li>
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#install">Install</a></li>
+          </ul>
         </div>
 
         <div class="footer-col">
           <p class="footer-head">Documentation</p>
           <ul>
+            <li><a href={`${base}/technical`}>Technical overview</a></li>
             <li><a href={`${base}/intro`}>What is APE?</a></li>
             <li><a href={`${base}/glyph-primer`}>Glyph primer</a></li>
             <li><a href={`${base}/runtime/architecture`}>Runtime architecture</a></li>
@@ -281,13 +471,6 @@ weather_holds⇒rail_daytrip→Sintra@mid_week`}
             <li><a href="https://github.com/real-wimpSquad/ape/blob/main/LICENSE" rel="noopener">License</a></li>
           </ul>
         </div>
-
-        <div class="footer-col">
-          <p class="footer-head">Apocrypha</p>
-          <ul>
-            <li><a href={`${base}/origin`}>Origin</a></li>
-          </ul>
-        </div>
       </div>
 
       <div class="footer-rule"></div>
@@ -297,116 +480,21 @@ weather_holds⇒rail_daytrip→Sintra@mid_week`}
       </p>
     </footer>
 
-    <style is:global>
-      html, body {
-        background: var(--ape-bg);
-        color: var(--ape-text);
-        margin: 0;
-        padding: 0;
-        font-family: var(--ape-font-prose);
-        -webkit-font-smoothing: antialiased;
-      }
-      ::selection {
-        background: var(--ape-amber);
-        color: var(--ape-bg);
-      }
-      a { color: var(--ape-amber); text-decoration: none; }
-      a:hover { color: var(--ape-amber-bright); }
-    </style>
-
     <style>
-      body {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
+      /* Landing-page primary is cool teal — the trust register the page
+         lives in. Override --ape-amber tokens so every reference (hero
+         accent, eyebrows, CTAs, brand mark, FAQ, footer) picks up cool
+         automatically. /technical keeps the editorial amber from
+         tokens.css. */
+      :root {
+        --ape-amber: #4ea9a0;
+        --ape-amber-bright: #7ed1c6;
+        --ape-amber-dim: #3d6b66;
       }
-
-      /* ────────────────  Top nav  ──────────────── */
-
-      .topnav {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1.75rem clamp(1.25rem, 5vw, 3rem);
-        max-width: 70rem;
-        margin: 0 auto;
-        width: 100%;
-        box-sizing: border-box;
-      }
-      .brand {
-        display: inline-flex;
-        align-items: baseline;
-        gap: 0.45rem;
-        font-family: var(--ape-font-mono);
-        font-weight: 500;
-        font-size: 1rem;
-        color: var(--ape-text);
-        letter-spacing: 0.03em;
-      }
-      .brand-mark { color: var(--ape-amber); font-size: 1.1em; }
-      .topnav nav { display: flex; gap: 1.75rem; }
-      .topnav nav a {
-        font-family: var(--ape-font-mono);
-        font-size: 0.85rem;
-        color: var(--ape-text-muted);
-        letter-spacing: 0.04em;
-      }
-      .topnav nav a:hover { color: var(--ape-amber); }
-
-      /* ────────────────  Layout  ──────────────── */
-
-      main {
-        position: relative;
-        z-index: 1;
-        flex: 1;
-        max-width: 70rem;
-        margin: 0 auto;
-        padding: 0 clamp(1.25rem, 5vw, 3rem);
-        width: 100%;
-        box-sizing: border-box;
-      }
-
-      /* Single rhythm: 6.5rem of breath between sections, plus a hairline. */
-      section {
-        padding: 6.5rem 0;
-        position: relative;
-      }
-      section + section {
-        border-top: 1px solid var(--ape-border);
-      }
-
-      /* Standardized section eyebrow — Roman numeral · rule · uppercase label */
-      .section-eyebrow {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        margin: 0 0 3rem;
-        font-family: var(--ape-font-mono);
-        font-size: 0.72rem;
-        text-transform: uppercase;
-        letter-spacing: 0.28em;
-        color: var(--ape-amber-dim);
-      }
-      .section-eyebrow .numeral {
-        font-family: var(--ape-font-display);
-        font-style: italic;
-        font-size: 1.15rem;
-        text-transform: none;
-        letter-spacing: 0;
-        color: var(--ape-amber);
-        line-height: 1;
-        padding-top: 0.05em;
-      }
-      .section-eyebrow .rule {
-        flex: 0 0 3rem;
-        height: 1px;
-        background: var(--ape-amber-dim);
-        opacity: 0.55;
-      }
-      .section-eyebrow .label {
-        color: var(--ape-amber-dim);
+      :root[data-theme='light'] {
+        --ape-amber: #1f5e58;
+        --ape-amber-bright: #14463f;
+        --ape-amber-dim: #5a8a82;
       }
 
       /* ────────────────  Hero  ──────────────── */
@@ -425,8 +513,8 @@ weather_holds⇒rail_daytrip→Sintra@mid_week`}
       .hero-title {
         font-family: var(--ape-font-display);
         font-weight: 400;
-        font-size: clamp(3.25rem, 8.5vw, 6.5rem);
-        line-height: 0.98;
+        font-size: clamp(2.6rem, 7vw, 5rem);
+        line-height: 1.02;
         letter-spacing: -0.018em;
         margin: 0 0 2.25rem;
         color: var(--ape-text);
@@ -438,432 +526,391 @@ weather_holds⇒rail_daytrip→Sintra@mid_week`}
       .hero-sub {
         font-family: var(--ape-font-prose);
         font-size: 1.18rem;
-        line-height: 1.55;
+        line-height: 1.6;
         color: var(--ape-text-muted);
-        max-width: 38rem;
+        max-width: 42rem;
         margin: 0 0 2.75rem;
       }
 
-      .cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
-      .cta {
+      /* ────────────────  Block headers (shared by problem/solution/see/how/install)  ──────────────── */
+
+      .block-eyebrow {
         font-family: var(--ape-font-mono);
-        font-size: 0.9rem;
-        letter-spacing: 0.04em;
-        padding: 0.85rem 1.35rem;
-        border-radius: 4px;
-        transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
-      }
-      .cta.primary {
-        background: var(--ape-amber);
-        color: var(--ape-bg);
-        border: 1px solid var(--ape-amber);
-      }
-      .cta.primary:hover {
-        background: var(--ape-amber-bright);
-        border-color: var(--ape-amber-bright);
-        color: var(--ape-bg);
-      }
-      .cta.ghost {
-        background: transparent;
-        color: var(--ape-text);
-        border: 1px solid var(--ape-border-strong);
-      }
-      .cta.ghost:hover {
-        border-color: var(--ape-amber);
-        color: var(--ape-amber);
-      }
-
-      /* ────────────────  §I — The shape (editorial lede + drop cap)  ──────────────── */
-
-      .essay { max-width: 44rem; }
-
-      .lede {
-        font-family: var(--ape-font-display);
-        font-weight: 400;
-        font-size: clamp(1.4rem, 2.1vw, 1.75rem);
-        line-height: 1.45;
-        letter-spacing: -0.005em;
-        color: var(--ape-text);
-        margin: 0 0 2rem;
-      }
-      .lede strong {
-        font-weight: 400;
-        color: var(--ape-amber);
-      }
-      .lede em {
-        font-style: italic;
-        color: var(--ape-text);
-      }
-      .dropcap {
-        float: left;
-        font-family: var(--ape-font-display);
-        font-style: normal;
-        font-size: 4.6em;
-        line-height: 0.85;
-        padding: 0.08em 0.12em 0 0;
-        margin: 0.05em 0.05em 0 0;
-        color: var(--ape-amber);
-      }
-
-      .aside {
-        margin: 2.25rem 0 0;
-        font-family: var(--ape-font-display);
-        font-style: italic;
-        font-size: 1.05rem;
-        line-height: 1.55;
-        color: var(--ape-text-muted);
-      }
-      .aside a {
-        color: var(--ape-text-muted);
-        border-bottom: 1px solid var(--ape-border-strong);
-        transition: color 0.18s ease, border-color 0.18s ease;
-      }
-      .aside a:hover {
-        color: var(--ape-amber);
-        border-bottom-color: var(--ape-amber);
-      }
-
-      /* ────────────────  §II — Translation (hero pair + cards)  ──────────────── */
-
-      .big-translation {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        align-items: stretch;
-        margin: 0 0 4rem;
-        padding: 2.25rem 0 2.5rem;
-        border-top: 1px solid var(--ape-border);
-        border-bottom: 1px solid var(--ape-border);
-      }
-      @media (min-width: 860px) {
-        .big-translation {
-          grid-template-columns: 1fr auto 1fr;
-          gap: 2.5rem;
-        }
-      }
-      .big-side {
-        display: flex;
-        flex-direction: column;
-        gap: 0.85rem;
-      }
-      .side-tag {
-        font-family: var(--ape-font-mono);
-        font-size: 0.66rem;
+        font-size: 0.72rem;
         text-transform: uppercase;
-        letter-spacing: 0.22em;
-        color: var(--ape-text-faint);
-        margin: 0;
+        letter-spacing: 0.28em;
+        color: var(--ape-amber);
+        margin: 0 0 1.25rem;
       }
-      .big-prose .side-text {
+      .block-head {
         font-family: var(--ape-font-display);
-        font-size: clamp(1.25rem, 1.7vw, 1.45rem);
-        line-height: 1.5;
-        color: var(--ape-text);
-        margin: 0;
-      }
-      .big-glyph .side-text.mono {
-        font-family: var(--ape-font-mono);
         font-weight: 400;
-        font-size: clamp(0.95rem, 1.15vw, 1.05rem);
-        line-height: 1.7;
+        font-size: clamp(1.9rem, 3.6vw, 2.75rem);
+        line-height: 1.18;
+        letter-spacing: -0.01em;
+        color: var(--ape-text);
+        margin: 0 0 1.75rem;
+        max-width: 38rem;
+      }
+      .block-head em {
+        font-style: italic;
         color: var(--ape-amber);
-        white-space: pre-wrap;
-        overflow-wrap: anywhere;
-        margin: 0;
-        padding: 0;
-        background: transparent;
-        display: block;
       }
-      .big-divider {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--ape-amber-dim);
-      }
-      @media (max-width: 859px) {
-        .big-divider { padding: 0.5rem 0; }
-      }
-      .big-arrow {
-        font-family: var(--ape-font-mono);
-        font-size: 1.6rem;
-        line-height: 1;
-        color: var(--ape-amber);
-        opacity: 0.7;
-      }
-
-      .translation-blurb {
-        max-width: 52rem;
+      .block-lede {
         font-family: var(--ape-font-prose);
-        font-size: 1rem;
+        font-size: 1.08rem;
         line-height: 1.65;
         color: var(--ape-text-muted);
+        max-width: 42rem;
         margin: 0 0 3rem;
       }
-      .translation-blurb code {
-        font-family: var(--ape-font-mono);
-        color: var(--ape-amber);
-        background: rgba(212, 161, 74, 0.08);
-        padding: 0.05em 0.3em;
-        border-radius: 3px;
-        font-size: 0.95em;
-      }
-      @media (prefers-color-scheme: light) {
-        .translation-blurb code {
-          background: rgba(154, 77, 12, 0.08);
-        }
-      }
-      .translation-more {
-        font-family: var(--ape-font-display);
-        font-style: italic;
-        font-size: 1.05rem;
-        color: var(--ape-text-muted);
-        margin: 0 0 1.75rem;
-      }
 
-      .cards {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-      }
-      @media (min-width: 900px) {
-        .cards { grid-template-columns: repeat(3, 1fr); }
-      }
+      /* ────────────────  Problem  ──────────────── */
 
-      /* ────────────────  §III — Why it matters  ──────────────── */
-
-      .why { max-width: 46rem; }
-      .statements {
+      .pain-list {
         list-style: none;
         padding: 0;
         margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 2.25rem;
-      }
-      .statement {
-        display: grid;
-        grid-template-columns: 2.5rem 1fr;
-        gap: 1.4rem;
-        align-items: baseline;
-        opacity: 0;
-        transform: translateY(14px);
-        transition:
-          opacity 700ms cubic-bezier(.2,.8,.2,1),
-          transform 700ms cubic-bezier(.2,.8,.2,1);
-        transition-delay: calc(var(--i) * 95ms);
-      }
-      .statement.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .statement .marker {
-        font-family: var(--ape-font-mono);
-        font-size: 0.68rem;
-        letter-spacing: 0.18em;
-        color: var(--ape-amber-dim);
-        padding-top: 0.5rem;
-      }
-      .statement p {
-        margin: 0;
-        font-family: var(--ape-font-display);
-        font-weight: 400;
-        font-size: clamp(1.4rem, 2.1vw, 1.85rem);
-        line-height: 1.32;
-        letter-spacing: -0.005em;
-        color: var(--ape-text);
-      }
-      .statement .key {
-        font-style: normal;
-        color: var(--ape-amber);
-        margin-right: 0.35rem;
-      }
-      .statement em { font-style: italic; }
-
-      /* ────────────────  §IV — Ship manifest  ──────────────── */
-
-      .terminal-head {
-        font-family: var(--ape-font-mono);
-        font-weight: 400;
-        font-size: 0.95rem;
-        letter-spacing: 0.01em;
-        color: var(--ape-text);
-        margin: 0 0 2.5rem;
-        display: inline-flex;
-        align-items: baseline;
-      }
-      .terminal-head .prompt { color: var(--ape-amber); }
-      .terminal-head .sp { white-space: pre; }
-      .terminal-head .cmd { color: var(--ape-text); }
-      .terminal-head .flag { color: var(--ape-amber); }
-      .terminal-head .caret {
-        color: var(--ape-amber);
-        margin-left: 0.25ch;
-        animation: ape-blink 1.1s step-end infinite;
-      }
-      @keyframes ape-blink {
-        0%, 50%  { opacity: 1; }
-        51%, 100% { opacity: 0; }
-      }
-
-      .manifest {
-        margin: 0;
-        padding: 0.5rem 0 0.5rem 1.5rem;
-        border-left: 1px solid var(--ape-border);
-        display: flex;
-        flex-direction: column;
-        gap: 0.85rem;
-      }
-      .manifest .row {
-        display: grid;
-        grid-template-columns: 20ch 1fr;
-        column-gap: 1.75rem;
-        align-items: baseline;
-        font-family: var(--ape-font-mono);
-        font-size: 0.92rem;
-        line-height: 1.6;
-        opacity: 0;
-        transform: translateX(-8px);
-        transition:
-          opacity 500ms ease-out,
-          transform 500ms ease-out;
-        transition-delay: calc(var(--i) * 60ms);
-      }
-      .manifest .row.visible {
-        opacity: 1;
-        transform: translateX(0);
-      }
-      .manifest dt {
-        color: var(--ape-amber);
-        font-weight: 400;
-        letter-spacing: 0.01em;
-      }
-      .manifest dd {
-        margin: 0;
-        color: var(--ape-text-muted);
-      }
-      .manifest .value { color: var(--ape-amber-bright); }
-
-      @media (max-width: 720px) {
-        .manifest { padding-left: 1rem; }
-        .manifest .row {
-          grid-template-columns: 1fr;
-          column-gap: 0;
-          row-gap: 0.1rem;
-        }
-        .manifest dt { padding-bottom: 0.1rem; }
-      }
-
-      /* ────────────────  Reveal animation (essay)  ──────────────── */
-
-      .essay,
-      .big-translation {
-        opacity: 0;
-        transform: translateY(10px);
-        transition:
-          opacity 700ms cubic-bezier(.2,.8,.2,1),
-          transform 700ms cubic-bezier(.2,.8,.2,1);
-      }
-      .essay.visible,
-      .big-translation.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .statement, .manifest .row, .essay, .big-translation {
-          opacity: 1;
-          transform: none;
-          transition: none;
-        }
-        .terminal-head .caret { animation: none; }
-      }
-
-      /* ────────────────  Footer  ──────────────── */
-
-      .site-footer {
-        position: relative;
-        z-index: 1;
-        border-top: 1px solid var(--ape-border);
-        margin-top: 4rem;
-        padding: 4rem clamp(1.25rem, 5vw, 3rem) 2.5rem;
-        max-width: 70rem;
-        margin-left: auto;
-        margin-right: auto;
-        width: 100%;
-        box-sizing: border-box;
-      }
-      .footer-grid {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 2rem;
       }
       @media (min-width: 760px) {
-        .footer-grid {
-          grid-template-columns: 1.4fr repeat(3, 1fr);
-          gap: 2rem;
-        }
+        .pain-list { grid-template-columns: repeat(3, 1fr); }
       }
-      .footer-brand .footer-mark {
+      .pain {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.85rem;
+        align-items: start;
+      }
+      @media (min-width: 760px) {
+        .pain { grid-template-columns: 1fr; gap: 1rem; }
+      }
+      .pain-mark {
         font-family: var(--ape-font-mono);
-        font-weight: 500;
-        font-size: 1rem;
-        color: var(--ape-text);
-        letter-spacing: 0.03em;
-        margin: 0 0 0.75rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        color: var(--ape-amber-dim);
+        padding-top: 0.15rem;
       }
-      .footer-brand .mark-arrow { color: var(--ape-amber); }
-      .footer-tagline {
+      .pain h3 {
         font-family: var(--ape-font-display);
-        font-style: italic;
-        font-size: 1.05rem;
-        line-height: 1.5;
-        color: var(--ape-text-muted);
-        margin: 0 0 0.85rem;
+        font-weight: 400;
+        font-size: 1.45rem;
+        line-height: 1.2;
+        color: var(--ape-text);
+        margin: 0 0 0.45rem;
       }
-      .footer-stack {
-        font-family: var(--ape-font-mono);
-        font-size: 0.78rem;
-        letter-spacing: 0.05em;
-        color: var(--ape-text-faint);
+      .pain p {
+        font-family: var(--ape-font-prose);
+        font-size: 0.98rem;
+        line-height: 1.6;
+        color: var(--ape-text-muted);
         margin: 0;
       }
-      .footer-head {
+
+      /* ────────────────  Solution / benefits  ──────────────── */
+
+      .benefit-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      @media (min-width: 760px) {
+        .benefit-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+      }
+      .benefit {
+        padding: 1.75rem;
+        border: 1px solid var(--ape-border);
+        border-radius: 6px;
+        background: var(--ape-bg-card);
+        box-shadow: var(--ape-shadow-card);
+      }
+      .benefit-tag {
         font-family: var(--ape-font-mono);
         font-size: 0.7rem;
         text-transform: uppercase;
         letter-spacing: 0.22em;
-        color: var(--ape-amber-dim);
-        margin: 0 0 1rem;
+        color: var(--ape-amber);
+        margin: 0 0 0.85rem;
       }
-      .footer-col ul {
-        list-style: none;
+      .benefit h3 {
+        font-family: var(--ape-font-display);
+        font-weight: 400;
+        font-size: 1.4rem;
+        line-height: 1.25;
+        color: var(--ape-text);
+        margin: 0 0 0.75rem;
+      }
+      .benefit p {
+        font-family: var(--ape-font-prose);
+        font-size: 0.98rem;
+        line-height: 1.6;
+        color: var(--ape-text-muted);
         margin: 0;
-        padding: 0;
+      }
+
+      /* ────────────────  Scenarios (see it)  ──────────────── */
+
+      .scenarios {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      @media (min-width: 900px) {
+        .scenarios { grid-template-columns: repeat(3, 1fr); }
+      }
+      .scenario {
+        padding: 1.75rem;
+        border: 1px solid var(--ape-border);
+        border-radius: 6px;
+        background: var(--ape-bg-card);
+        box-shadow: var(--ape-shadow-card);
         display: flex;
         flex-direction: column;
-        gap: 0.55rem;
+        gap: 1rem;
       }
-      .footer-col a {
-        font-family: var(--ape-font-prose);
-        font-size: 0.92rem;
-        color: var(--ape-text-muted);
-        transition: color 0.18s ease;
-      }
-      .footer-col a:hover { color: var(--ape-amber); }
-
-      .footer-rule {
-        height: 1px;
-        background: var(--ape-border);
-        margin: 3rem 0 1.5rem;
-      }
-      .footer-copy {
-        font-family: var(--ape-font-display);
-        font-style: italic;
-        font-size: 0.92rem;
-        line-height: 1.5;
-        color: var(--ape-text-faint);
+      .scenario-tag {
+        font-family: var(--ape-font-mono);
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        color: var(--ape-amber);
         margin: 0;
       }
+      .scenario-title {
+        font-family: var(--ape-font-display);
+        font-style: italic;
+        font-size: 1.15rem;
+        line-height: 1.35;
+        color: var(--ape-text);
+        margin: 0 0 0.25rem;
+      }
+      .scenario-said {
+        border-left: 2px solid var(--ape-amber-dim);
+        padding: 0.15rem 0 0.15rem 0.85rem;
+      }
+      .said-when {
+        font-family: var(--ape-font-mono);
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--ape-text-faint);
+        margin: 0 0 0.3rem;
+      }
+      .said-body {
+        font-family: var(--ape-font-prose);
+        font-size: 0.95rem;
+        line-height: 1.55;
+        color: var(--ape-text);
+        margin: 0;
+        font-style: italic;
+      }
+      .scenario-row {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.75rem;
+        align-items: baseline;
+      }
+      .row-tag {
+        font-family: var(--ape-font-mono);
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--ape-text-faint);
+        margin: 0;
+        white-space: nowrap;
+      }
+      .scenario-row.good .row-tag { color: var(--ape-amber); }
+      .row-body {
+        font-family: var(--ape-font-prose);
+        font-size: 0.93rem;
+        line-height: 1.5;
+        color: var(--ape-text-muted);
+        margin: 0;
+      }
+      .scenario-row.good .row-body { color: var(--ape-text); }
+
+      /* ────────────────  How it works  ──────────────── */
+
+      .how { max-width: 50rem; }
+      .steps {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 2.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .step {
+        display: grid;
+        grid-template-columns: 3rem 1fr;
+        gap: 1.25rem;
+        align-items: baseline;
+      }
+      .step-num {
+        font-family: var(--ape-font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        color: var(--ape-amber);
+        padding-top: 0.55rem;
+      }
+      .step h3 {
+        font-family: var(--ape-font-display);
+        font-weight: 400;
+        font-size: clamp(1.4rem, 2vw, 1.7rem);
+        line-height: 1.22;
+        color: var(--ape-text);
+        margin: 0 0 0.5rem;
+      }
+      .step p {
+        font-family: var(--ape-font-prose);
+        font-size: 1rem;
+        line-height: 1.6;
+        color: var(--ape-text-muted);
+        margin: 0;
+      }
+      .how-handoff {
+        font-family: var(--ape-font-display);
+        font-style: italic;
+        font-size: 1.05rem;
+        line-height: 1.55;
+        color: var(--ape-text-muted);
+        margin: 0;
+      }
+      .how-handoff a {
+        border-bottom: 1px solid var(--ape-border-strong);
+        transition: color 0.18s ease, border-color 0.18s ease;
+      }
+      .how-handoff a:hover { border-bottom-color: var(--ape-amber); }
+
+      /* ────────────────  FAQ  ──────────────── */
+
+      .faq { max-width: 52rem; }
+      .faq-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+      }
+      .faq-item {
+        border: 1px solid var(--ape-border);
+        border-radius: 6px;
+        background: var(--ape-bg-card);
+        box-shadow: var(--ape-shadow-card);
+        overflow: hidden;
+      }
+      .faq-item summary {
+        list-style: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.25rem;
+        padding: 1.25rem 1.5rem;
+        transition: background 0.18s ease;
+      }
+      .faq-item summary::-webkit-details-marker { display: none; }
+      .faq-item summary:hover { background: var(--ape-bg-raised); }
+      .faq-q {
+        font-family: var(--ape-font-display);
+        font-weight: 400;
+        font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+        line-height: 1.3;
+        color: var(--ape-text);
+      }
+      .faq-toggle {
+        font-family: var(--ape-font-mono);
+        font-size: 1.3rem;
+        line-height: 1;
+        color: var(--ape-amber);
+        transition: transform 0.2s ease;
+        flex-shrink: 0;
+      }
+      .faq-item[open] .faq-toggle { transform: rotate(45deg); }
+      .faq-a {
+        padding: 0 1.5rem 1.5rem;
+        border-top: 1px solid var(--ape-border);
+        padding-top: 1.25rem;
+      }
+      .faq-a p {
+        font-family: var(--ape-font-prose);
+        font-size: 1rem;
+        line-height: 1.65;
+        color: var(--ape-text-muted);
+        margin: 0 0 0.85rem;
+      }
+      .faq-a p:last-child { margin-bottom: 0; }
+      .faq-a strong {
+        font-weight: 500;
+        color: var(--ape-text);
+      }
+      .faq-a em {
+        font-style: italic;
+        color: var(--ape-text);
+      }
+
+      /* ────────────────  Install  ──────────────── */
+
+      .install-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        margin: 0 0 1.75rem;
+      }
+      @media (min-width: 760px) {
+        .install-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      }
+      .install-block {
+        border: 1px solid var(--ape-border);
+        border-radius: 6px;
+        background: var(--ape-bg-raised);
+        padding: 1.25rem 1.5rem;
+      }
+      .os-tag {
+        font-family: var(--ape-font-mono);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        color: var(--ape-amber);
+        margin: 0 0 0.75rem;
+      }
+      .install-code {
+        font-family: var(--ape-font-mono);
+        font-size: 0.9rem;
+        line-height: 1.7;
+        color: var(--ape-text);
+        background: transparent;
+        margin: 0;
+        padding: 0;
+        overflow-x: auto;
+      }
+      .install-code code {
+        font-family: inherit;
+        color: inherit;
+        background: transparent;
+        padding: 0;
+      }
+      .install-after {
+        font-family: var(--ape-font-prose);
+        font-size: 1rem;
+        line-height: 1.65;
+        color: var(--ape-text-muted);
+        max-width: 44rem;
+        margin: 0 0 2rem;
+      }
+      .install-after code {
+        font-family: var(--ape-font-mono);
+        font-size: 0.92em;
+        color: var(--ape-amber);
+        background: rgba(212, 161, 74, 0.08);
+        padding: 0.05em 0.35em;
+        border-radius: 3px;
+      }
+      :root[data-theme='light'] .install-after code {
+        background: rgba(154, 77, 12, 0.08);
+      }
+      .install-ctas { margin-top: 0.5rem; }
     </style>
 
     <script is:inline>
